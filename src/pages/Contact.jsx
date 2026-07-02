@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
+import "./Contact.css";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ export default function Contact() {
           <h1 className="section-title">Contact Us</h1>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: "50px" }}>
+        <div className="contact-grid">
           
           {/* Left Column: Direct Info Card */}
           <div>
@@ -119,7 +120,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div style={{ background: "#ffffff", border: "1px solid var(--color-border)", borderRadius: "var(--radius-lg)", padding: "40px 30px", boxShadow: "var(--shadow-md)" }}>
+          <div className="contact-form-container">
             <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.8rem", marginBottom: "25px" }}>
               Send an Inquiry Message
             </h2>
@@ -146,7 +147,7 @@ export default function Contact() {
                 />
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+              <div className="contact-form-row">
                 <div className="form-group">
                   <label className="form-label" htmlFor="contact-email">Email Address *</label>
                   <input
@@ -213,7 +214,7 @@ export default function Contact() {
         </div>
 
         {/* Full-width Map section */}
-        <div style={{ marginTop: "60px", borderRadius: "var(--radius-lg)", overflow: "hidden", border: "2px solid var(--color-border)", height: "400px", boxShadow: "var(--shadow-md)" }}>
+        <div className="contact-map-container">
           <iframe
             title="Ruthika Jewellery Location Showroom Map"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.1350810336214!2d78.45070267591745!3d17.429283701633517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90cae25e9851%3A0xc48c0864eb862b53!2sPunjagutta%20Rd%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
