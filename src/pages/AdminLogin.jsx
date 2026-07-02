@@ -42,7 +42,7 @@ export default function AdminLogin() {
                 type="email"
                 id="login-email"
                 className="form-control"
-                placeholder="admin@ruthika.com"
+                placeholder="Enter email id"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -62,7 +62,7 @@ export default function AdminLogin() {
                 type="password"
                 id="login-password"
                 className="form-control"
-                placeholder="••••••••"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -84,11 +84,6 @@ export default function AdminLogin() {
           </button>
 
         </form>
-
-        <p style={{ marginTop: "20px", fontSize: "0.75rem", color: "var(--color-text-muted)", textAlign: "center" }}>
-          Tip: In mock local database mode, use: <br/> 
-          <strong>admin@ruthika.com</strong> / <strong>admin</strong>
-        </p>
 
       </div>
     </div>
