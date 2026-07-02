@@ -352,45 +352,45 @@
 
 @media (max-width: 480px) {
   .hero-custom-container {
-    padding: 10px 15px;
+    padding: 8px 12px;
   }
   .hero-custom-frame {
-    grid-template-columns: 1fr; /* Stack vertically */
-    grid-template-rows: auto auto;
-    gap: 12px;
-    padding: 15px;
+    grid-template-columns: 1.1fr 0.9fr; /* Two columns side-by-side */
+    gap: 8px;
+    padding: 10px;
     border-width: 2px;
+    align-items: center;
   }
   .hero-custom-content {
-    order: 1;
+    order: unset;
   }
   .hero-custom-img-wrapper {
     display: block;
-    order: 2;
-    height: 140px; /* Landscape crop for mobile */
+    order: unset;
+    height: 100%; /* Vertical height matches the gold border box */
     width: 100%;
     border-width: 1.5px;
   }
   .hero-custom-image {
-    object-position: center 15%; /* Focus on founder's face */
+    object-position: center 5%; /* Zoom/crop focusing on face and upper saree */
   }
   .hero-custom-title {
-    font-size: 1.2rem;
+    font-size: 0.95rem;
   }
   .hero-custom-list {
-    gap: 8px;
-    margin-bottom: 5px;
+    gap: 6px;
+    margin-bottom: 0;
   }
   .hero-custom-list li {
-    font-size: 0.78rem;
-    gap: 8px;
-    line-height: 1.35;
+    font-size: 0.65rem; /* Clean, compact readable text */
+    gap: 6px;
+    line-height: 1.25;
   }
   .hero-custom-icon {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .hero-custom-btn-shop {
-    padding: 6px 14px;
-    font-size: 0.7rem;
+    padding: 4px 10px;
+    font-size: 0.6rem;
   }
 }
