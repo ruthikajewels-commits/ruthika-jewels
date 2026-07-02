@@ -248,6 +248,15 @@ export const dbGetProducts = async () => {
       querySnapshot.forEach((doc) => {
         list.push({ id: doc.id, ...doc.data() });
       });
+      
+      // Auto-seed default products if empty
+      if (list.length === 0) {
+        console.log("Auto-seeding default products to Firestore...");
+        for (const prod of DEFAULT_PRODUCTS) {
+          await setDoc(doc(firestoreDb, "products", prod.id), prod);
+          list.push(prod);
+        }
+      }
       return list;
     } catch (e) {
       console.error("Firestore read error, using fallback:", e);
@@ -308,6 +317,15 @@ export const dbGetCategories = async () => {
       const snapshot = await getDocs(collection(firestoreDb, "categories"));
       const list = [];
       snapshot.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+      
+      // Auto-seed default categories if empty
+      if (list.length === 0) {
+        console.log("Auto-seeding default categories to Firestore...");
+        for (const cat of DEFAULT_CATEGORIES) {
+          await setDoc(doc(firestoreDb, "categories", cat.id), cat);
+          list.push(cat);
+        }
+      }
       return list;
     } catch (e) {
       console.error("Firestore read error:", e);
@@ -360,6 +378,15 @@ export const dbGetBanners = async () => {
       const snapshot = await getDocs(collection(firestoreDb, "banners"));
       const list = [];
       snapshot.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
+      
+      // Auto-seed default banners if empty
+      if (list.length === 0) {
+        console.log("Auto-seeding default banners to Firestore...");
+        for (const b of DEFAULT_BANNERS) {
+          await setDoc(doc(firestoreDb, "banners", b.id), b);
+          list.push(b);
+        }
+      }
       return list;
     } catch (e) {
       console.error("Firestore read error:", e);
@@ -513,6 +540,48 @@ export const authCheckSession = (callback) => {
   return () => {};
 };
 
+// Helper to compress images to under 100KB using Canvas (bypasses Firebase Storage subscription)
+const compressImageFile = (file) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+        const MAX_DIM = 900;
+        
+        if (width > MAX_DIM || height > MAX_DIM) {
+          if (width > height) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to compressed web JPEG (70% quality)
+        resolve(canvas.toDataURL("image/jpeg", 0.7));
+      };
+      img.onerror = () => {
+        resolve(e.target.result); // Fallback to raw base64
+      };
+      img.src = e.target.result;
+    };
+    reader.onerror = () => {
+      resolve("");
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
 // Unified File Upload Client (Firebase Storage vs Base64 Fallback)
 export const dbUploadFile = async (file) => {
   if (isFirebaseEnabled && firebaseStorage) {
@@ -522,15 +591,10 @@ export const dbUploadFile = async (file) => {
       const downloadUrl = await getDownloadURL(snapshot.ref);
       return downloadUrl;
     } catch (e) {
-      console.error("Firebase Storage upload error, falling back to base64:", e);
+      console.warn("Firebase Storage requires billing setup. Falling back to compressed base64:", e);
     }
   }
 
-  // Fallback to base64 FileReader
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
+  // Fallback to compressed base64
+  return compressImageFile(file);
 };
