@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Award, Compass, Heart, Users, Sparkles } from "lucide-react";
+import "./About.css";
 
 export default function About() {
   return (
@@ -14,7 +15,7 @@ export default function About() {
         </div>
 
         {/* Introduction Section */}
-        <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "50px", alignItems: "center", marginBottom: "70px" }}>
+        <div className="about-intro-grid">
           <div>
             <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "2rem", marginBottom: "20px", lineHeight: "1.3" }}>
               Adorning Devotion with Premium Craftsmanship
@@ -30,26 +31,26 @@ export default function About() {
             </p>
           </div>
           <div>
-            <div style={{ borderRadius: "var(--radius-lg)", border: "2px solid var(--color-gold)", padding: "10px", background: "#fff", boxShadow: "var(--shadow-lg)" }}>
+            <div className="about-intro-img-frame">
               <img 
                 src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=500&q=80" 
                 alt="Crafting Jewellery" 
-                style={{ borderRadius: "var(--radius-md)", width: "100%", height: "350px", objectFit: "cover" }}
+                className="about-intro-img"
               />
             </div>
           </div>
         </div>
 
         {/* Meet the Founder Section */}
-        <div style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: "50px", alignItems: "center", marginBottom: "70px", padding: "50px 0", borderTop: "1px solid var(--color-border)", borderBottom: "1px solid var(--color-border)" }}>
+        <div className="about-founder-grid">
           <div>
-            <div style={{ position: "relative", borderRadius: "var(--radius-lg)", border: "2px solid var(--color-gold)", padding: "10px", background: "#fff", boxShadow: "var(--shadow-lg)", maxWidth: "340px", margin: "0 auto" }}>
+            <div className="about-founder-card">
               <img 
                 src="/founder.jpg" 
                 alt="Mrs. Ruthika, Founder of Ruthika Jewellery" 
-                style={{ borderRadius: "var(--radius-md)", width: "100%", height: "450px", objectFit: "cover", objectPosition: "center top" }}
+                className="about-founder-img"
               />
-              <div style={{ position: "absolute", bottom: "-20px", left: "50%", transform: "translateX(-50%)", background: "var(--grad-gold)", color: "var(--color-maroon-dark)", padding: "8px 24px", borderRadius: "var(--radius-sm)", fontWeight: "700", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "1px", boxShadow: "var(--shadow-md)", whiteSpace: "nowrap" }}>
+              <div className="about-founder-label">
                 Mrs. Ruthika, Founder
               </div>
             </div>
@@ -82,12 +83,12 @@ export default function About() {
         </div>
 
         {/* Core Values Section */}
-        <div style={{ backgroundColor: "#fbf9f4", padding: "60px 40px", borderRadius: "var(--radius-lg)", border: "1px solid var(--color-border)", marginBottom: "60px" }}>
+        <div className="about-values-box">
           <h2 className="text-center" style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "2rem", marginBottom: "40px" }}>
             Our Pillars of Trust
           </h2>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "30px" }}>
+          <div className="about-values-grid">
             
             <div style={{ textAlign: "center" }}>
               <div style={{ color: "var(--color-gold)", marginBottom: "15px", display: "inline-block" }}>
