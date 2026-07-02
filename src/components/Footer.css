@@ -1,0 +1,193 @@
+.footer-section {
+  background: var(--color-maroon-dark);
+  color: #ebdcd8;
+  border-top: 4px solid var(--color-gold);
+  padding: 60px 0 20px 0;
+  font-family: var(--font-body);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 45px;
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* Brand Column */
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.footer-description {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #dfcdca;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: var(--transition);
+}
+
+.social-icon-btn:hover {
+  background: var(--grad-gold);
+  color: var(--color-maroon-dark);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-3px);
+}
+
+/* Links & Info Columns */
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-gold-light);
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--color-gold);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-link-item {
+  font-size: 0.85rem;
+}
+
+.footer-link-item a {
+  color: #dfcdca;
+}
+
+.footer-link-item a:hover {
+  color: var(--color-gold);
+  padding-left: 5px;
+}
+
+.footer-info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 0.85rem;
+}
+
+.footer-info-item {
+  display: flex;
+  gap: 12px;
+  line-height: 1.4;
+}
+
+.footer-info-item svg {
+  color: var(--color-gold);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.footer-contact-link {
+  color: #dfcdca;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-contact-link:hover {
+  color: var(--color-gold) !important;
+  text-decoration: underline !important;
+}
+
+/* Maps Integration Column */
+.footer-map-container {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  height: 150px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.footer-map-overlay-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: var(--color-maroon-dark);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.footer-map-overlay-btn:hover {
+  background: var(--grad-gold);
+  color: var(--color-maroon-dark);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 40px;
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #b0a09d;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+@media (max-width: 640px) {
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

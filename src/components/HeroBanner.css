@@ -1,0 +1,367 @@
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 82px);
+  min-height: 520px;
+  overflow: hidden;
+  background-color: var(--color-navy);
+}
+
+@media (max-width: 768px) {
+  .hero-slider {
+    height: calc(100vh - 82px);
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider {
+    height: calc(100vh - 82px);
+    min-height: 420px;
+  }
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--grad-overlay);
+}
+
+/* Slide Content Overlay */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  max-width: 600px;
+  color: var(--color-text-white);
+  z-index: 10;
+  padding: 20px;
+  opacity: 0;
+  transform: translate(0, -40%);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+
+.hero-slide.active .hero-content {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+  margin-bottom: 15px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-content {
+    left: 5%;
+    right: 5%;
+  }
+}
+
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #dfcdca;
+}
+
+@media (max-width: 480px) {
+  .hero-desc {
+    display: none;
+  }
+  .hero-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+}
+
+/* Slider Controls */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(58, 6, 14, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  transition: var(--transition);
+}
+
+.hero-arrow:hover {
+  background: var(--grad-gold);
+  color: var(--color-maroon-dark);
+  box-shadow: var(--shadow-gold);
+  border-color: var(--color-gold);
+}
+
+.hero-arrow-left {
+  left: 20px;
+}
+
+.hero-arrow-right {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .hero-arrow-left {
+    left: 10px;
+  }
+  .hero-arrow-right {
+    right: 10px;
+  }
+}
+
+.hero-indicators {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 15;
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hero-dot.active {
+  background: var(--color-gold);
+  width: 30px;
+}
+
+/* Custom Slide: Why Ruthika Jewellery */
+.hero-slide-custom {
+  background: linear-gradient(135deg, #2c060d 0%, #120104 100%) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-custom-container {
+  width: 100%;
+  height: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.hero-custom-frame {
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  border: 4px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 30px;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.hero-custom-content {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.hero-custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 15px;
+}
+
+.hero-custom-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.hero-custom-btn-shop {
+  background: var(--grad-gold);
+  color: var(--color-maroon-dark);
+  border: none;
+  padding: 8px 24px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-custom-btn-shop:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+  background: linear-gradient(135deg, #fcf6ba 0%, #d4af37 50%, #aa771c 100%);
+}
+
+.hero-custom-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-custom-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #fcece8;
+}
+
+.hero-custom-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.hero-custom-text strong {
+  color: var(--color-gold-light);
+}
+
+.hero-custom-img-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--color-gold-dull);
+  box-shadow: var(--shadow-md);
+  box-sizing: border-box;
+}
+
+.hero-custom-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Responsive Custom Slide styles */
+@media (max-width: 900px) {
+  .hero-custom-container {
+    padding: 20px 40px;
+  }
+  .hero-custom-frame {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+  .hero-custom-img-wrapper {
+    display: none; /* Hide image on smaller screens to prevent content overflow in height constraints */
+  }
+  .hero-custom-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-custom-container {
+    padding: 10px 20px;
+  }
+  .hero-custom-title {
+    font-size: 1.2rem;
+  }
+  .hero-custom-list li {
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+  .hero-custom-btn-shop {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
