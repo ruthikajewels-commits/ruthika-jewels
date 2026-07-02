@@ -494,7 +494,10 @@ export const authLogin = async (email, password) => {
       const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
       return { uid: userCredential.user.uid, email: userCredential.user.email };
     } catch (e) {
-      throw new Error("Invalid admin credentials.");
+      console.error("Firebase authentication error:", e);
+      // Clean up firebase error prefix if present
+      const cleanMsg = e.message ? e.message.replace("Firebase: ", "") : "Invalid credentials.";
+      throw new Error(cleanMsg);
     }
   }
 
@@ -505,7 +508,7 @@ export const authLogin = async (email, password) => {
     sessionStorage.setItem("rj_session", JSON.stringify(user));
     return user;
   } else {
-    throw new Error("Invalid admin credentials.");
+    throw new Error("Invalid credentials (Local Database Mode). Use admin@ruthika.com / admin");
   }
 };
 
