@@ -215,3 +215,133 @@
 .cart-checkout-btn {
   width: 100%;
 }
+
+/* Checkout Form Modal Styles */
+.checkout-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(9, 17, 36, 0.85);
+  z-index: 2000;
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  animation: WA_fadeIn 0.3s ease-out;
+}
+
+.checkout-modal {
+  background: var(--color-bg-card);
+  border: 3px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: WA_slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.checkout-modal-header {
+  padding: 15px 20px;
+  background: var(--color-maroon-dark);
+  color: var(--color-text-white);
+  border-bottom: 2px solid var(--color-gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-modal-header h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--color-gold-light);
+}
+
+.checkout-modal-close {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.checkout-modal-close:hover {
+  color: var(--color-gold);
+}
+
+.checkout-form {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.form-group-full {
+  grid-column: span 6;
+}
+
+.form-group-half {
+  grid-column: span 3;
+}
+
+.form-group-third {
+  grid-column: span 2;
+}
+
+@media (max-width: 480px) {
+  .form-group-half, .form-group-third {
+    grid-column: span 6;
+  }
+}
+
+.checkout-form label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-maroon-dark);
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #fdfaf6;
+  font-size: 0.85rem;
+  color: var(--color-text-dark);
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+.checkout-form input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.25);
+  background: #fff;
+}
+
+@keyframes WA_fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes WA_slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

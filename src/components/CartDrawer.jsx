@@ -1,5 +1,6 @@
-import React from "react";
-import { X, Trash2, Minus, Plus, ShoppingBag } from "lucide-react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { X, ShoppingBag, Trash2, Plus, Minus } from "lucide-react";
 import "./CartDrawer.css";
 
 export default function CartDrawer({ 
@@ -9,6 +10,18 @@ export default function CartDrawer({
   onUpdateQuantity, 
   onRemoveFromCart 
 }) {
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    doorNo: "",
+    areaName: "",
+    landmark: "",
+    city: "",
+    pincode: "",
+    state: "",
+    altPhone: ""
+  });
 
   // Calculate Subtotal
   const totalPrice = cartItems.reduce((acc, item) => {
@@ -25,24 +38,46 @@ export default function CartDrawer({
     }).format(amount);
   };
 
-  // WhatsApp Cart Checkout Order compiled message
+  // WhatsApp Cart Checkout: triggers the shipping coordinates form modal
   const handleWhatsAppCheckout = () => {
     if (cartItems.length === 0) return;
+    setShowForm(true);
+  };
+
+  // Compile items + shipping details and redirect to WhatsApp
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     
-    const phoneNumber = "916303774530"; // Customizable admin whatsapp number
-    let message = "Hello Ruthika Jewellery,\n\nI would like to place an order for the following designs:\n\n";
+    const phoneNumber = "916303774530"; // Admin whatsapp number
+    let message = "*RUTHIKA Jewellery - New Order Request*\n\n";
     
+    message += "*Ordered Designs:*\n";
     cartItems.forEach((item, index) => {
       const activePrice = item.discountPrice || item.price;
       const itemTotal = activePrice * item.quantity;
-      message += `${index + 1}. *${item.name}*\n   SKU: ${item.sku}\n   Qty: ${item.quantity} x ${formatPrice(activePrice)} = ${formatPrice(itemTotal)}\n\n`;
+      message += `${index + 1}. *${item.name}* (SKU: ${item.sku}) - Qty: ${item.quantity} x ${formatPrice(activePrice)} = ${formatPrice(itemTotal)}\n`;
     });
     
-    message += `*Total Order Value*: ${formatPrice(totalPrice)}\n\n`;
-    message += "Please verify availability and share payment/delivery steps.";
+    message += `\n*Total Order Value*: ${formatPrice(totalPrice)}\n\n`;
+    
+    message += "*Customer Shipping Coordinates:*\n";
+    message += `• *Name:* ${formData.name}\n`;
+    message += `• *Contact Number:* ${formData.phone}\n`;
+    if (formData.altPhone) {
+      message += `• *Alternative Number:* ${formData.altPhone}\n`;
+    }
+    message += `• *Address:* Door No: ${formData.doorNo}, Area Name: ${formData.areaName}, Landmark: ${formData.landmark}\n`;
+    message += `• *City:* ${formData.city}\n`;
+    message += `• *Pincode:* ${formData.pincode}\n`;
+    message += `• *State:* ${formData.state}\n\n`;
+    
+    message += "Please verify availability and share payment steps. Thank you!";
 
     const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, "_blank");
+    
+    setShowForm(false);
+    onClose();
   };
 
   return (
@@ -140,6 +175,125 @@ export default function CartDrawer({
         )}
 
       </div>
+
+      {/* Shipping Address Form Modal Overlay */}
+      {showForm && (
+        <div className="checkout-modal-overlay" onClick={(e) => e.stopPropagation()}>
+          <div className="checkout-modal animate-fade-in">
+            <div className="checkout-modal-header">
+              <h4>Shipping Details</h4>
+              <button onClick={() => setShowForm(false)} className="checkout-modal-close" aria-label="Close form">
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleFormSubmit} className="checkout-form">
+              <div className="form-grid">
+                <div className="form-group-full">
+                  <label>Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="Enter customer name"
+                  />
+                </div>
+                
+                <div className="form-group-half">
+                  <label>Contact Number *</label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    placeholder="Enter mobile number"
+                  />
+                </div>
+                
+                <div className="form-group-half">
+                  <label>Alternative Number</label>
+                  <input
+                    type="tel"
+                    value={formData.altPhone}
+                    onChange={(e) => setFormData({ ...formData, altPhone: e.target.value })}
+                    placeholder="Enter alternative number"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>Door No *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.doorNo}
+                    onChange={(e) => setFormData({ ...formData, doorNo: e.target.value })}
+                    placeholder="Flat / Door / House No"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>Area Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.areaName}
+                    onChange={(e) => setFormData({ ...formData, areaName: e.target.value })}
+                    placeholder="Street / Area Name"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>Landmark *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.landmark}
+                    onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
+                    placeholder="Nearby landmark"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>City *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.city}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    placeholder="Enter city"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>Pincode *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.pincode}
+                    onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
+                    placeholder="6-digit pincode"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>State *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.state}
+                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                    placeholder="Enter state"
+                  />
+                </div>
+              </div>
+              
+              <button type="submit" className="btn btn-whatsapp btn-full" style={{ marginTop: "20px" }}>
+                Send Order to WhatsApp
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
