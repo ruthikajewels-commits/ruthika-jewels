@@ -32,6 +32,9 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
+// Log for debugging api-key-not-valid
+console.log("Compiled Firebase API Key:", firebaseConfig.apiKey);
+
 // Check if we have valid-looking Firebase credentials
 const isFirebaseEnabled = 
   firebaseConfig.apiKey && 
