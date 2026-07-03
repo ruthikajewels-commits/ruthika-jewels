@@ -14,13 +14,11 @@ export default function CartDrawer({
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    doorNo: "",
-    areaName: "",
-    landmark: "",
+    altPhone: "",
+    address: "",
     city: "",
-    pincode: "",
     state: "",
-    altPhone: ""
+    pincode: ""
   });
 
   // Calculate Subtotal
@@ -62,14 +60,14 @@ export default function CartDrawer({
     
     message += "*Customer Shipping Coordinates:*\n";
     message += `• *Name:* ${formData.name}\n`;
-    message += `• *Contact Number:* ${formData.phone}\n`;
+    message += `• *Phone:* ${formData.phone}\n`;
     if (formData.altPhone) {
-      message += `• *Alternative Number:* ${formData.altPhone}\n`;
+      message += `• *Alternate Phone:* ${formData.altPhone}\n`;
     }
-    message += `• *Address:* Door No: ${formData.doorNo}, Area Name: ${formData.areaName}, Landmark: ${formData.landmark}\n`;
+    message += `• *Address:* ${formData.address}\n`;
     message += `• *City:* ${formData.city}\n`;
-    message += `• *Pincode:* ${formData.pincode}\n`;
-    message += `• *State:* ${formData.state}\n\n`;
+    message += `• *State:* ${formData.state}\n`;
+    message += `• *Pincode:* ${formData.pincode}\n\n`;
     
     message += "Please verify availability and share payment steps. Thank you!";
 
@@ -200,7 +198,7 @@ export default function CartDrawer({
                 </div>
                 
                 <div className="form-group-half">
-                  <label>Contact Number *</label>
+                  <label>Phone Number *</label>
                   <input
                     type="tel"
                     required
@@ -211,45 +209,23 @@ export default function CartDrawer({
                 </div>
                 
                 <div className="form-group-half">
-                  <label>Alternative Number</label>
+                  <label>Alternate Phone Number</label>
                   <input
                     type="tel"
                     value={formData.altPhone}
                     onChange={(e) => setFormData({ ...formData, altPhone: e.target.value })}
-                    placeholder="Enter alternative number"
+                    placeholder="Enter alternate number"
                   />
                 </div>
 
-                <div className="form-group-third">
-                  <label>Door No *</label>
+                <div className="form-group-full">
+                  <label>Complete Address *</label>
                   <input
                     type="text"
                     required
-                    value={formData.doorNo}
-                    onChange={(e) => setFormData({ ...formData, doorNo: e.target.value })}
-                    placeholder="Flat / Door / House No"
-                  />
-                </div>
-
-                <div className="form-group-third">
-                  <label>Area Name *</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.areaName}
-                    onChange={(e) => setFormData({ ...formData, areaName: e.target.value })}
-                    placeholder="Street / Area Name"
-                  />
-                </div>
-
-                <div className="form-group-third">
-                  <label>Landmark *</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.landmark}
-                    onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
-                    placeholder="Nearby landmark"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    placeholder="Flat/House No, Building, Street, Landmark"
                   />
                 </div>
 
@@ -265,17 +241,6 @@ export default function CartDrawer({
                 </div>
 
                 <div className="form-group-third">
-                  <label>Pincode *</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.pincode}
-                    onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                    placeholder="6-digit pincode"
-                  />
-                </div>
-
-                <div className="form-group-third">
                   <label>State *</label>
                   <input
                     type="text"
@@ -283,6 +248,17 @@ export default function CartDrawer({
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     placeholder="Enter state"
+                  />
+                </div>
+
+                <div className="form-group-third">
+                  <label>Pincode *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.pincode}
+                    onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
+                    placeholder="6-digit pincode"
                   />
                 </div>
               </div>
