@@ -586,20 +586,37 @@ const compressImageFile = (file) => {
   });
 };
 
-// Unified File Upload Client (Firebase Storage vs Base64 Fallback)
+// Unified File Upload Client (Firebase Storage vs Base64 Fallback with 3-second Timeout)
 export const dbUploadFile = async (file) => {
-  if (isFirebaseEnabled && firebaseStorage) {
+  // Always prepare compressed base64 first (extremely fast)
+  const base64Fallback = await compressImageFile(file);
+
+  const hasStorageBucket = 
+    firebaseConfig.storageBucket && 
+    !firebaseConfig.storageBucket.includes("YOUR_") &&
+    !firebaseConfig.storageBucket.includes("placeholder");
+
+  if (isFirebaseEnabled && firebaseStorage && hasStorageBucket) {
     try {
       const fileRef = ref(firebaseStorage, `products/${Date.now()}_${file.name}`);
-      const snapshot = await uploadBytes(fileRef, file);
-      const downloadUrl = await getDownloadURL(snapshot.ref);
+      
+      // 3-second timeout to prevent upload hanging
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Upload timed out after 3 seconds")), 3000)
+      );
+
+      const uploadPromise = (async () => {
+        const snapshot = await uploadBytes(fileRef, file);
+        return getDownloadURL(snapshot.ref);
+      })();
+
+      const downloadUrl = await Promise.race([uploadPromise, timeoutPromise]);
       return downloadUrl;
     } catch (e) {
-      console.warn("Firebase Storage failed, falling back to compressed base64:", e);
-      return compressImageFile(file);
+      console.warn("Firebase Storage upload failed or timed out. Using compressed base64 fallback:", e);
+      return base64Fallback;
     }
   }
 
-  // Fallback to compressed base64
-  return compressImageFile(file);
+  return base64Fallback;
 };
