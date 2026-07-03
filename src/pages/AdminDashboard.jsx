@@ -98,8 +98,8 @@ export default function AdminDashboard() {
       discountPrice: "",
       images: [],
       description: "",
-      specifications: "Length: 24 Inches, Weight: 80 grams, Base Metal: Copper-Brass, Plating: Gold Finish",
-      warranty: "1 Year Polish Warranty",
+      specifications: "",
+      warranty: "",
       isNew: true,
       isBestSeller: false,
       isSoldOut: false
@@ -215,6 +215,19 @@ export default function AdminDashboard() {
         return prev;
       });
     }
+  };
+
+  const handleRenameCategoryDirect = async (catId, oldName) => {
+    const newName = window.prompt(`Rename category "${oldName}" to:`, oldName);
+    if (newName === null) return;
+    const trimmed = newName.trim();
+    if (!trimmed) {
+      alert("Category name cannot be empty.");
+      return;
+    }
+    await dbSaveCategory({ id: catId, name: trimmed });
+    triggerNotification(`Category renamed to "${trimmed}" successfully.`);
+    await loadAllDashboardData();
   };
 
   // -------------------------------------------------------------
@@ -367,17 +380,40 @@ export default function AdminDashboard() {
                         onClick={() => setSelectedAdminCategory(cat.id)}
                       >
                         <span className="admin-category-name">{cat.name}</span>
-                        <button 
-                          type="button" 
-                          className="admin-category-del-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteCategoryDirect(cat.id, cat.name);
-                          }}
-                          title="Delete Category"
-                        >
-                          <Trash2 size={12} />
-                        </button>
+                        <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                          <button 
+                            type="button" 
+                            className="admin-category-edit-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRenameCategoryDirect(cat.id, cat.name);
+                            }}
+                            title="Rename Category"
+                            style={{ 
+                              background: "none", 
+                              border: "none", 
+                              color: "var(--color-gold)", 
+                              cursor: "pointer", 
+                              padding: "4px",
+                              display: "flex",
+                              alignItems: "center",
+                              transition: "color 0.2s"
+                            }}
+                          >
+                            <Edit2 size={12} />
+                          </button>
+                          <button 
+                            type="button" 
+                            className="admin-category-del-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteCategoryDirect(cat.id, cat.name);
+                            }}
+                            title="Delete Category"
+                          >
+                            <Trash2 size={12} />
+                          </button>
+                        </div>
                       </li>
                     ))}
                   </ul>

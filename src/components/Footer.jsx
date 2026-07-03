@@ -32,7 +32,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="https://www.instagram.com/ruthikajewellery?igsh=MTV3djlma2w2d2p5eA==" 
+                href="https://www.facebook.com/people/Ruthika-Jewellery/61590867037439/?sk=reels_tab" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="social-icon-btn" 
@@ -43,7 +43,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a 
-                href="https://www.instagram.com/ruthikajewellery?igsh=MTV3djlma2w2d2p5eA==" 
+                href="https://www.youtube.com/@ruthikajewellery/featured" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="social-icon-btn" 
@@ -110,12 +110,13 @@ export default function Footer() {
               <li className="footer-info-item">
                 <MapPin size={18} style={{ flexShrink: 0, marginTop: "2px" }} />
                 <a 
-                  href="https://maps.google.com/?q=Punjagutta+Hyderabad+Telangana" 
+                  href="https://maps.google.com/?q=G.Divyareddy+1-4-249/56/E+Balajinagar+Suryapet+Brahmana+Kalyana+Mandapam+open+gym+Suryapet+Suryapet+Telagana+508213" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="footer-contact-link"
+                  style={{ whiteSpace: "pre-line" }}
                 >
-                  Ruthika Jewellery Showroom, Main Temple Road, Punjagutta, Hyderabad, Telangana - 500082
+                  G.Divyareddy, 1-4-249/56/E, Balajinagar, Near Brahmana Kalyana Mandapam Open Gym, Suryapet, Telangana - 508213
                 </a>
               </li>
               <li className="footer-info-item">
@@ -140,7 +141,7 @@ export default function Footer() {
               <div className="footer-map-container">
                 <iframe
                   title="Ruthika Jewellery Location Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.1350810336214!2d78.45070267591745!3d17.429283701633517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90cae25e9851%3A0xc48c0864eb862b53!2sPunjagutta%20Rd%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  src="https://maps.google.com/maps?q=Brahmana%20Kalyana%20Mandapam%20Suryapet&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -149,7 +150,7 @@ export default function Footer() {
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
                 <a
-                  href="https://maps.google.com/?q=Punjagutta+Hyderabad+Telangana"
+                  href="https://maps.google.com/?q=G.Divyareddy+1-4-249/56/E+Balajinagar+Suryapet+Brahmana+Kalyana+Mandapam+open+gym+Suryapet+Suryapet+Telagana+508213"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-map-overlay-btn"

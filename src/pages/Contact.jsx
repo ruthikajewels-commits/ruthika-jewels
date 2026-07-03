@@ -69,8 +69,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 style={{ fontSize: "1rem", fontWeight: "700", color: "var(--color-maroon-dark)", marginBottom: "4px" }}>Showroom Address</h3>
-                  <p style={{ fontSize: "0.85rem", color: "var(--color-text-muted)" }}>
-                    Ruthika Jewellery Showroom, Main Temple Road, Punjagutta, Hyderabad, Telangana - 500082
+                  <p style={{ fontSize: "0.85rem", color: "var(--color-text-muted)", whiteSpace: "pre-line" }}>
+                    G.Divyareddy, 1-4-249/56/E, Balajinagar, Near Brahmana Kalyana Mandapam Open Gym, Suryapet, Telangana - 508213
                   </p>
                 </div>
               </div>
@@ -217,7 +217,7 @@ export default function Contact() {
         <div className="contact-map-container">
           <iframe
             title="Ruthika Jewellery Location Showroom Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.1350810336214!2d78.45070267591745!3d17.429283701633517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90cae25e9851%3A0xc48c0864eb862b53!2sPunjagutta%20Rd%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=Brahmana%20Kalyana%20Mandapam%20Suryapet&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}

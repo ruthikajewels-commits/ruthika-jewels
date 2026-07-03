@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import PromoStrip from "./components/PromoStrip";
 import Footer from "./components/Footer";
 import CartDrawer from "./components/CartDrawer";
 import Home from "./pages/Home";
@@ -106,6 +107,9 @@ export default function App() {
 
   return (
     <>
+      {/* Promo Announcement Strip */}
+      <PromoStrip />
+
       {/* Navigation Header */}
       <Navbar 
         wishlistCount={wishlist.length} 

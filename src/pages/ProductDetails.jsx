@@ -203,33 +203,39 @@ export default function ProductDetails({ onToggleWishlist, wishlist, onAddToCart
               <div className="tab-content">
                 
                 {activeTab === "desc" && (
-                  <table className="specs-table">
-                    <tbody>
-                      {product.specifications.split(", ").map((spec, i) => {
-                        const parts = spec.split(": ");
-                        if (parts.length === 2) {
+                  !product.specifications || product.specifications.trim() === "" ? (
+                    <p style={{ padding: "10px 0", color: "var(--color-text-muted)", fontStyle: "italic" }}>
+                      No specifications specified for this design. Please contact our support for sizing and custom details.
+                    </p>
+                  ) : (
+                    <table className="specs-table">
+                      <tbody>
+                        {product.specifications.split(", ").map((spec, i) => {
+                          const parts = spec.split(": ");
+                          if (parts.length === 2) {
+                            return (
+                              <tr key={i}>
+                                <td className="specs-label">{parts[0]}</td>
+                                <td className="specs-value">{parts[1]}</td>
+                              </tr>
+                            );
+                          }
                           return (
                             <tr key={i}>
-                              <td className="specs-label">{parts[0]}</td>
-                              <td className="specs-value">{parts[1]}</td>
+                              <td colSpan="2" className="specs-value">{spec}</td>
                             </tr>
                           );
-                        }
-                        return (
-                          <tr key={i}>
-                            <td colSpan="2" className="specs-value">{spec}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                        })}
+                      </tbody>
+                    </table>
+                  )
                 )}
 
                 {activeTab === "warranty" && (
                   <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                       <Shield size={20} style={{ color: "var(--color-gold)", flexShrink: 0, marginTop: "2px" }} />
-                      <p><strong>Warranty Detail:</strong> {product.warranty || "6 Months Gold Plating Polish Warranty under standard wear conditions."}</p>
+                      <p><strong>Warranty Detail:</strong> {product.warranty || "Standard Polish Warranty under standard wear conditions."}</p>
                     </div>
                     <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                       <Sparkles size={20} style={{ color: "var(--color-gold)", flexShrink: 0, marginTop: "2px" }} />
