@@ -68,7 +68,7 @@ export default function HeroBanner({ banners = [] }) {
                         </span>
                       </li>
                       <li>
-                        <span className="hero-custom-icon">✅</span>
+                        <span className="hero-custom-icon">🤝</span>
                         <span className="hero-custom-text">
                           Brand reputation built on <strong>trust and premium quality</strong>.
                         </span>
