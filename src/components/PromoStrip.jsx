@@ -10,7 +10,14 @@ export default function PromoStrip() {
     async function loadOffers() {
       try {
         const list = await dbGetOffers();
-        setOffers(list || []);
+        const welcomeMsg = {
+          id: "welcome-msg",
+          title: "Welcome",
+          description: "Welcome to Ruthika Jewellery",
+          code: "",
+          discount: ""
+        };
+        setOffers([welcomeMsg, ...(list || [])]);
       } catch (e) {
         console.error("Error loading offers:", e);
       }
@@ -49,11 +56,17 @@ export default function PromoStrip() {
             className={getSlideClass(index)}
           >
             <span className="promo-text-wrapper">
-              ✨ <strong>{offer.title}</strong>: {offer.description}
-              {offer.code && (
-                <> | USE CODE: <span className="promo-code-badge">{offer.code}</span></>
+              {offer.id === "welcome-msg" ? (
+                <span>✨ Welcome to Ruthika Jewellery ✨</span>
+              ) : (
+                <>
+                  ✨ <strong>{offer.title}</strong>: {offer.description}
+                  {offer.code && (
+                    <> | USE CODE: <span className="promo-code-badge">{offer.code}</span></>
+                  )}
+                  {offer.discount && <span className="promo-discount-badge"> ({offer.discount})</span>} ✨
+                </>
               )}
-              {offer.discount && <span className="promo-discount-badge"> ({offer.discount})</span>} ✨
             </span>
           </div>
         ))}

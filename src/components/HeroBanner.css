@@ -1,23 +1,26 @@
 .hero-slider {
   position: relative;
   width: 100%;
-  height: calc(100vh - 82px);
-  min-height: 520px;
+  height: 520px;
   overflow: hidden;
   background-color: var(--color-navy);
 }
 
+@media (max-width: 900px) {
+  .hero-slider {
+    height: 400px;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-slider {
-    height: calc(100vh - 82px);
-    min-height: 480px;
+    height: 320px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-slider {
-    height: calc(100vh - 82px);
-    min-height: 420px;
+    height: 250px;
   }
 }
 
@@ -121,12 +124,13 @@
     display: none;
   }
   .hero-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 2px;
+    margin-bottom: 8px;
   }
   .hero-title {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
   }
 }
 
@@ -174,6 +178,12 @@
   }
   .hero-arrow-right {
     right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-arrow {
+    display: none;
   }
 }
 
@@ -355,9 +365,9 @@
     padding: 8px 12px;
   }
   .hero-custom-frame {
-    grid-template-columns: 1.1fr 0.9fr; /* Two columns side-by-side */
+    grid-template-columns: 1.15fr 0.85fr; /* Give slightly more room to text column */
     gap: 8px;
-    padding: 10px;
+    padding: 8px;
     border-width: 2px;
     align-items: center;
   }
@@ -367,30 +377,30 @@
   .hero-custom-img-wrapper {
     display: block;
     order: unset;
-    height: 100%; /* Vertical height matches the gold border box */
+    height: 100%;
     width: 100%;
     border-width: 1.5px;
   }
   .hero-custom-image {
-    object-position: center 5%; /* Zoom/crop focusing on face and upper saree */
+    object-position: center top;
   }
   .hero-custom-title {
-    font-size: 0.95rem;
+    font-size: 0.82rem;
   }
   .hero-custom-list {
-    gap: 6px;
+    gap: 4px;
     margin-bottom: 0;
   }
   .hero-custom-list li {
-    font-size: 0.65rem; /* Clean, compact readable text */
-    gap: 6px;
-    line-height: 1.25;
+    font-size: 0.58rem; /* Clean, compact readable text */
+    gap: 4px;
+    line-height: 1.2;
   }
   .hero-custom-icon {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
   }
   .hero-custom-btn-shop {
-    padding: 4px 10px;
-    font-size: 0.6rem;
+    padding: 3px 8px;
+    font-size: 0.55rem;
   }
 }
