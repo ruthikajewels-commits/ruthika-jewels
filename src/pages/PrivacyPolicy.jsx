@@ -66,7 +66,7 @@ export default function PrivacyPolicy() {
               5. Contacting Us
             </h2>
             <p>
-              If you have any questions regarding this Privacy Policy, please email us at <strong>privacy@ruthikajewellery.com</strong>.
+              If you have any questions regarding this Privacy Policy, please email us at <strong>ruthikajewels@gmail.com</strong>.
             </p>
           </section>
 
