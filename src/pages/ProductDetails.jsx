@@ -235,7 +235,7 @@ export default function ProductDetails({ onToggleWishlist, wishlist, onAddToCart
                   <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                       <Shield size={20} style={{ color: "var(--color-gold)", flexShrink: 0, marginTop: "2px" }} />
-                      <p><strong>Warranty Detail:</strong> {product.warranty || "No warranty"}</p>
+                      <p><strong>Warranty Detail:</strong> {product.warranty && product.warranty.trim() ? product.warranty : "No warranty"}</p>
                     </div>
                     <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
                       <Sparkles size={20} style={{ color: "var(--color-gold)", flexShrink: 0, marginTop: "2px" }} />
