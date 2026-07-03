@@ -14,15 +14,18 @@ export default function ReturnPolicy() {
           
           <section style={{ marginBottom: "30px" }}>
             <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.4rem", marginBottom: "15px" }}>
-              1. Overview of Return Criteria
+              1. Overview of Return & Replacement Criteria
             </h2>
             <p>
-              Due to the delicate, handcrafted nature of temple jewelry, we do not support general refunds or returns based on design preferences. We only accept returns or free replacements if:
+              Due to the delicate, handcrafted nature of temple jewelry, we do not support general refunds or returns based on design preferences. We only accept returns, refunds, or replacements under the following two conditions:
             </p>
-            <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>
-              <li>The product arrives damaged during transit.</li>
-              <li>You receive a completely incorrect design or SKU from the one ordered.</li>
-              <li>The item has manufacturing issues or stone missing defects straight out of packaging.</li>
+            <ul style={{ paddingLeft: "20px", marginTop: "10px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              <li>
+                <strong>Product Arrives Damaged:</strong> If the product is damaged during transit, you are eligible for a money return (refund) or replacement. This requires full, continuous unboxing video proof showing the package seal and damage.
+              </li>
+              <li>
+                <strong>Incorrect Product Delivered:</strong> If by mistake you receive a completely different design from what you ordered (e.g., you ordered a ring but received a necklace), we will replace it. This also requires full, continuous unboxing video proof.
+              </li>
             </ul>
           </section>
 
