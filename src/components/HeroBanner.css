@@ -369,7 +369,7 @@
     gap: 8px;
     padding: 8px;
     border-width: 2px;
-    align-items: center;
+    align-items: stretch;
   }
   .hero-custom-content {
     order: unset;
