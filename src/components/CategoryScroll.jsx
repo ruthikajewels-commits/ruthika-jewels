@@ -24,6 +24,8 @@ export default function CategoryScroll({ categories = [], onSelectCategory }) {
   };
 
   const getCategoryImage = (category) => {
+    if (category.imageUrl) return category.imageUrl;
+    
     const id = (category.id || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     const name = (category.name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     

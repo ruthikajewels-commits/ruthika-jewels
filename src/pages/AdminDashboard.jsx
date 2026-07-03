@@ -35,6 +35,10 @@ export default function AdminDashboard() {
   const [showProductModal, setShowProductModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null); // null means adding new
   const [discountInputMode, setDiscountInputMode] = useState("percentage"); // "percentage" or "price"
+  
+  // Categories modal states
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState({ id: "", name: "", imageUrl: "" });
 
 
 
@@ -200,16 +204,57 @@ export default function AdminDashboard() {
   // -------------------------------------------------------------
   // CATEGORIES CRUD HANDLERS
   // -------------------------------------------------------------
-  const handleAddCategoryDirect = async (e) => {
+  const handleOpenAddCategory = () => {
+    setCurrentCategory({
+      id: "cat-" + Date.now(),
+      name: "",
+      imageUrl: ""
+    });
+    setShowCategoryModal(true);
+  };
+
+  const handleOpenEditCategory = (cat) => {
+    setCurrentCategory({
+      id: cat.id,
+      name: cat.name,
+      imageUrl: cat.imageUrl || ""
+    });
+    setShowCategoryModal(true);
+  };
+
+  const handleCategorySubmit = async (e) => {
     e.preventDefault();
-    if (!newCategoryName.trim()) return;
-    const catId = newCategoryName.trim().toLowerCase().replace(/[^a-z0-9]/g, "-");
-    const catObj = { id: catId, name: newCategoryName.trim() };
+    if (!currentCategory.name.trim()) return;
+    
+    const catId = currentCategory.id || currentCategory.name.trim().toLowerCase().replace(/[^a-z0-9]/g, "-");
+    const catObj = {
+      ...currentCategory,
+      id: catId,
+      name: currentCategory.name.trim()
+    };
+    
     await dbSaveCategory(catObj);
-    triggerNotification(`Category "${catObj.name}" created successfully.`);
-    setNewCategoryName("");
+    triggerNotification(`Category "${catObj.name}" saved successfully.`);
+    setShowCategoryModal(false);
     await loadAllDashboardData();
     setSelectedAdminCategory(catId);
+  };
+
+  const handleCategoryImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      triggerNotification("Uploading category image...");
+      const fileUrl = await dbUploadFile(file);
+      setCurrentCategory(prev => ({
+        ...prev,
+        imageUrl: fileUrl
+      }));
+      triggerNotification("Category image uploaded successfully.");
+    } catch (err) {
+      console.error("Error uploading category image:", err);
+      triggerNotification("Error uploading category image.");
+    }
   };
 
   const handleDeleteCategoryDirect = async (catId, catName) => {
@@ -225,19 +270,6 @@ export default function AdminDashboard() {
         return prev;
       });
     }
-  };
-
-  const handleRenameCategoryDirect = async (catId, oldName) => {
-    const newName = window.prompt(`Rename category "${oldName}" to:`, oldName);
-    if (newName === null) return;
-    const trimmed = newName.trim();
-    if (!trimmed) {
-      alert("Category name cannot be empty.");
-      return;
-    }
-    await dbSaveCategory({ id: catId, name: trimmed });
-    triggerNotification(`Category renamed to "${trimmed}" successfully.`);
-    await loadAllDashboardData();
   };
 
   // -------------------------------------------------------------
@@ -366,20 +398,15 @@ export default function AdminDashboard() {
                 <div className="admin-sidebar-panel">
                   <h3 className="admin-panel-title">Categories</h3>
                   
-                  {/* Quick Add Category Form */}
-                  <form onSubmit={handleAddCategoryDirect} className="admin-quick-add-form">
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      placeholder="Add category name..." 
-                      value={newCategoryName}
-                      onChange={(e) => setNewCategoryName(e.target.value)}
-                      required
-                    />
-                    <button type="submit" className="btn btn-primary btn-sm btn-full" style={{ marginTop: "10px" }}>
-                      <Plus size={14} /> Add Category
-                    </button>
-                  </form>
+                  {/* Add Category Trigger Button */}
+                  <button 
+                    type="button" 
+                    className="btn btn-primary btn-sm btn-full" 
+                    style={{ marginBottom: "15px" }}
+                    onClick={handleOpenAddCategory}
+                  >
+                    <Plus size={14} /> Add Category
+                  </button>
                   
                   {/* Categories Navigation List */}
                   <ul className="admin-category-list">
@@ -396,9 +423,9 @@ export default function AdminDashboard() {
                             className="admin-category-edit-btn"
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleRenameCategoryDirect(cat.id, cat.name);
+                              handleOpenEditCategory(cat);
                             }}
-                            title="Rename Category"
+                            title="Edit Category"
                             style={{ 
                               background: "none", 
                               border: "none", 
@@ -1111,6 +1138,110 @@ export default function AdminDashboard() {
 
               <button type="submit" className="btn btn-primary btn-full">
                 Save Offer Details
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* -------------------------------------------------------------
+          CATEGORY ADD/EDIT MODAL
+      ------------------------------------------------------------- */}
+      {showCategoryModal && currentCategory && (
+        <div className="overlay" onClick={() => setShowCategoryModal(false)}>
+          <div className="modal-card animate-fade-in" style={{ maxWidth: "450px" }} onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3 className="modal-title">
+                {categories.some(c => c.id === currentCategory.id) ? "Edit Category" : "Add New Category"}
+              </h3>
+              <button className="modal-close" onClick={() => setShowCategoryModal(false)} aria-label="Close modal">
+                <X size={24} />
+              </button>
+            </div>
+
+            <form onSubmit={handleCategorySubmit}>
+              <div className="form-group">
+                <label className="form-label" htmlFor="cat-name">Category Name *</label>
+                <input
+                  type="text"
+                  id="cat-name"
+                  className="form-control"
+                  value={currentCategory.name}
+                  onChange={(e) => setCurrentCategory({ ...currentCategory, name: e.target.value })}
+                  placeholder="e.g. Bangles"
+                  required
+                />
+              </div>
+
+              <div className="form-group" style={{ marginBottom: "25px" }}>
+                <label className="form-label">Category Image [Optional]</label>
+                
+                {/* Image Preview Container */}
+                {currentCategory.imageUrl ? (
+                  <div style={{ position: "relative", width: "100px", height: "100px", borderRadius: "50%", overflow: "hidden", border: "2px solid var(--color-gold)", margin: "0 auto 15px auto", boxShadow: "0 4px 10px rgba(0,0,0,0.2)" }}>
+                    <img 
+                      src={currentCategory.imageUrl} 
+                      alt="Category Preview" 
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setCurrentCategory({ ...currentCategory, imageUrl: "" })}
+                      style={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                        background: "rgba(0,0,0,0.7)",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: "22px",
+                        height: "22px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer"
+                      }}
+                      title="Remove image"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                ) : (
+                  <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: "2px dashed var(--color-gold-dull)", margin: "0 auto 15px auto", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "var(--color-text-muted)", background: "rgba(255,255,255,0.03)" }}>
+                    <ImageIcon size={24} />
+                    <span style={{ fontSize: "0.65rem", marginTop: "4px" }}>No Image</span>
+                  </div>
+                )}
+
+                {/* Upload File Select Control */}
+                <div style={{ display: "flex", gap: "10px", alignItems: "center", marginTop: "10px" }}>
+                  <label 
+                    className="btn btn-secondary btn-sm" 
+                    style={{ flexGrow: 1, textAlign: "center", cursor: "pointer", margin: 0, padding: "8px 12px", fontSize: "0.78rem" }}
+                  >
+                    Upload File
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      style={{ display: "none" }} 
+                      onChange={handleCategoryImageUpload}
+                    />
+                  </label>
+                  <span style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", fontWeight: "bold" }}>OR</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Paste image URL here..."
+                    style={{ flexGrow: 2, height: "36px", fontSize: "0.8rem" }}
+                    value={currentCategory.imageUrl}
+                    onChange={(e) => setCurrentCategory({ ...currentCategory, imageUrl: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <button type="submit" className="btn btn-primary btn-full">
+                Save Category Details
               </button>
             </form>
           </div>
