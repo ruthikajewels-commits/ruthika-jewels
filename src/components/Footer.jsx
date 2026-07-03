@@ -133,7 +133,7 @@ export default function Footer() {
               </li>
               <li className="footer-info-item">
                 <Clock size={18} style={{ flexShrink: 0 }} />
-                <span>Mon - Sat: 10:30 AM to 8:30 PM</span>
+                <span>Mon - Sun: 6:00 AM to 10:00 PM</span>
               </li>
             </ul>
 

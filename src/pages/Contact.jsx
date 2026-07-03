@@ -101,7 +101,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 style={{ fontSize: "1rem", fontWeight: "700", color: "var(--color-maroon-dark)", marginBottom: "4px" }}>Store Hours</h3>
-                  <p style={{ fontSize: "0.85rem", color: "var(--color-text-muted)" }}>Monday - Saturday: 10:30 AM to 8:30 PM (Sunday Closed)</p>
+                  <p style={{ fontSize: "0.85rem", color: "var(--color-text-muted)" }}>Monday - Sunday: 6:00 AM to 10:00 PM</p>
                 </div>
               </div>
 
