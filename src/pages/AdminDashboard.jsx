@@ -34,6 +34,7 @@ export default function AdminDashboard() {
   // Modals States
   const [showProductModal, setShowProductModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null); // null means adding new
+  const [discountInputMode, setDiscountInputMode] = useState("percentage"); // "percentage" or "price"
 
 
 
@@ -114,6 +115,7 @@ export default function AdminDashboard() {
       pct = Math.round(((prod.price - prod.discountPrice) / prod.price) * 100);
     }
     setCurrentProduct({ ...prod, discountPercent: pct });
+    setDiscountInputMode(prod.discountPrice ? "price" : "percentage");
     setShowProductModal(true);
   };
 
@@ -702,7 +704,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "15px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
                 <div className="form-group">
                   <label className="form-label" htmlFor="prod-price">Original Price (₹) *</label>
                   <input
@@ -713,8 +715,12 @@ export default function AdminDashboard() {
                     onChange={(e) => {
                       const val = e.target.value ? Number(e.target.value) : "";
                       let discPrice = currentProduct.discountPrice;
-                      if (val && currentProduct.discountPercent) {
+                      if (val && discountInputMode === "percentage" && currentProduct.discountPercent) {
                         discPrice = Math.round(val - (val * currentProduct.discountPercent / 100));
+                      } else if (val && discountInputMode === "price" && currentProduct.discountPrice) {
+                        const pct = Math.round(((val - currentProduct.discountPrice) / val) * 100);
+                        setCurrentProduct({ ...currentProduct, price: val, discountPercent: pct });
+                        return;
                       }
                       setCurrentProduct({ 
                         ...currentProduct, 
@@ -725,48 +731,101 @@ export default function AdminDashboard() {
                     required
                   />
                 </div>
+                
                 <div className="form-group">
-                  <label className="form-label" htmlFor="prod-discount-percent">Discount (%) [Optional]</label>
-                  <input
-                    type="number"
-                    id="prod-discount-percent"
-                    className="form-control"
-                    placeholder="e.g. 10"
-                    value={currentProduct.discountPercent || ""}
-                    onChange={(e) => {
-                      const pct = e.target.value ? Number(e.target.value) : "";
-                      let discPrice = "";
-                      if (currentProduct.price && pct !== "") {
-                        discPrice = Math.round(currentProduct.price - (currentProduct.price * pct / 100));
-                      }
-                      setCurrentProduct({ 
-                        ...currentProduct, 
-                        discountPercent: pct,
-                        discountPrice: discPrice
-                      });
-                    }}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label" htmlFor="prod-discount-price">Discounted Price (₹) [Optional]</label>
-                  <input
-                    type="number"
-                    id="prod-discount-price"
-                    className="form-control"
-                    value={currentProduct.discountPrice || ""}
-                    onChange={(e) => {
-                      const discVal = e.target.value ? Number(e.target.value) : "";
-                      let pct = "";
-                      if (currentProduct.price && discVal !== "") {
-                        pct = Math.round(((currentProduct.price - discVal) / currentProduct.price) * 100);
-                      }
-                      setCurrentProduct({ 
-                        ...currentProduct, 
-                        discountPrice: discVal,
-                        discountPercent: pct
-                      });
-                    }}
-                  />
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                    <label className="form-label" style={{ marginBottom: 0 }}>
+                      {discountInputMode === "percentage" ? "Discount (%) [Optional]" : "Discounted Price (₹) [Optional]"}
+                    </label>
+                    <div style={{ display: "flex", border: "1px solid var(--color-gold)", borderRadius: "4px", overflow: "hidden" }}>
+                      <button
+                        type="button"
+                        onClick={() => setDiscountInputMode("percentage")}
+                        style={{
+                          background: discountInputMode === "percentage" ? "var(--color-gold)" : "none",
+                          color: discountInputMode === "percentage" ? "var(--color-maroon-dark)" : "var(--color-gold)",
+                          border: "none",
+                          padding: "2px 8px",
+                          fontSize: "0.7rem",
+                          fontWeight: "700",
+                          cursor: "pointer"
+                        }}
+                      >
+                        %
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setDiscountInputMode("price")}
+                        style={{
+                          background: discountInputMode === "price" ? "var(--color-gold)" : "none",
+                          color: discountInputMode === "price" ? "var(--color-maroon-dark)" : "var(--color-gold)",
+                          border: "none",
+                          padding: "2px 8px",
+                          fontSize: "0.7rem",
+                          fontWeight: "700",
+                          cursor: "pointer"
+                        }}
+                      >
+                        ₹
+                      </button>
+                    </div>
+                  </div>
+
+                  {discountInputMode === "percentage" ? (
+                    <div>
+                      <input
+                        type="number"
+                        id="prod-discount-percent"
+                        className="form-control"
+                        placeholder="e.g. 10"
+                        value={currentProduct.discountPercent || ""}
+                        onChange={(e) => {
+                          const pct = e.target.value ? Number(e.target.value) : "";
+                          let discPrice = "";
+                          if (currentProduct.price && pct !== "") {
+                            discPrice = Math.round(currentProduct.price - (currentProduct.price * pct / 100));
+                          }
+                          setCurrentProduct({ 
+                            ...currentProduct, 
+                            discountPercent: pct,
+                            discountPrice: discPrice
+                          });
+                        }}
+                      />
+                      {currentProduct.discountPrice ? (
+                        <div style={{ fontSize: "0.75rem", color: "var(--color-gold)", marginTop: "4px", fontWeight: "600" }}>
+                          Calculated Price: ₹{currentProduct.discountPrice}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <div>
+                      <input
+                        type="number"
+                        id="prod-discount-price"
+                        className="form-control"
+                        placeholder="e.g. 900"
+                        value={currentProduct.discountPrice || ""}
+                        onChange={(e) => {
+                          const discVal = e.target.value ? Number(e.target.value) : "";
+                          let pct = "";
+                          if (currentProduct.price && discVal !== "") {
+                            pct = Math.round(((currentProduct.price - discVal) / currentProduct.price) * 100);
+                          }
+                          setCurrentProduct({ 
+                            ...currentProduct, 
+                            discountPrice: discVal,
+                            discountPercent: pct
+                          });
+                        }}
+                      />
+                      {currentProduct.discountPercent !== "" && currentProduct.discountPercent > 0 ? (
+                        <div style={{ fontSize: "0.75rem", color: "var(--color-gold)", marginTop: "4px", fontWeight: "600" }}>
+                          Calculated Discount: {currentProduct.discountPercent}% Off
+                        </div>
+                      ) : null}
+                    </div>
+                  )}
                 </div>
               </div>
 
