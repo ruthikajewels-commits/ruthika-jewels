@@ -47,11 +47,11 @@ export default function About() {
             <div className="about-founder-card">
               <img 
                 src="/founder.jpg" 
-                alt="Mrs. Ruthika, Founder of Ruthika Jewellery" 
+                alt="G.Divyareddy, Founder of Ruthika Jewellery" 
                 className="about-founder-img"
               />
               <div className="about-founder-label">
-                Mrs. Ruthika, Founder
+                G.Divyareddy, Founder
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function About() {
             </blockquote>
 
             <p style={{ fontSize: "1rem", lineHeight: "1.8", color: "var(--color-text-dark)", marginBottom: "15px" }}>
-              Mrs. Ruthika founded <strong>Ruthika Jewellery</strong> with a singular, clear passion: to preserve the ornate grandeur of classical Indian temple ornaments and present them in premium, durable, gold-plated forms. As an avid admirer of Indian temple architecture, she observed the intricate jewelry details on divine deities and set out to collaborate with expert traditional artisans to recreate those sacred patterns.
+              G.Divyareddy founded <strong>Ruthika Jewellery</strong> with a singular, clear passion: to preserve the ornate grandeur of classical Indian temple ornaments and present them in premium, durable, gold-plated forms. As an avid admirer of Indian temple architecture, she observed the intricate jewelry details on divine deities and set out to collaborate with expert traditional artisans to recreate those sacred patterns.
             </p>
             
             <p style={{ fontSize: "1rem", lineHeight: "1.8", color: "var(--color-text-dark)", marginBottom: "20px" }}>

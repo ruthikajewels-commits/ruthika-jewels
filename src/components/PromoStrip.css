@@ -30,8 +30,8 @@
 .promo-slide {
   position: absolute;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(100%); /* Incoming starts off-screen from the right */
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-in-out;
   white-space: nowrap;
   padding: 0 20px;
   text-align: center;
@@ -44,7 +44,12 @@
 
 .promo-slide.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0); /* Centers the active offer */
+}
+
+.promo-slide.exit {
+  opacity: 0;
+  transform: translateX(-100%); /* Slides outgoing offer to the left */
 }
 
 .promo-text-wrapper {

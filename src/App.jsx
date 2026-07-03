@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import PromoStrip from "./components/PromoStrip";
 import Footer from "./components/Footer";
 import CartDrawer from "./components/CartDrawer";
+import { MessageCircle } from "lucide-react";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
@@ -164,6 +165,18 @@ export default function App() {
 
       {/* Footer Details */}
       <Footer />
+
+      {/* Floating WhatsApp Chat Button */}
+      <a
+        href="https://wa.me/916303774530?text=Hello%20Ruthika%20Jewellery%2C%20I%20have%20an%20enquiry."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="floating-whatsapp-btn"
+        aria-label="Chat on WhatsApp"
+        title="Chat on WhatsApp"
+      >
+        <MessageCircle size={28} />
+      </a>
 
       {/* Shopping Cart Side Drawer */}
       <CartDrawer 

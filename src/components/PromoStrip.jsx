@@ -30,6 +30,14 @@ export default function PromoStrip() {
     return () => clearInterval(interval);
   }, [offers.length]);
 
+  const getSlideClass = (index) => {
+    if (offers.length <= 1) return "promo-slide active";
+    if (index === currentIndex) return "promo-slide active";
+    const prevIndex = (currentIndex - 1 + offers.length) % offers.length;
+    if (index === prevIndex) return "promo-slide exit";
+    return "promo-slide";
+  };
+
   if (offers.length === 0) return null;
 
   return (
@@ -38,7 +46,7 @@ export default function PromoStrip() {
         {offers.map((offer, index) => (
           <div
             key={offer.id || index}
-            className={`promo-slide ${index === currentIndex ? "active" : ""}`}
+            className={getSlideClass(index)}
           >
             <span className="promo-text-wrapper">
               ✨ <strong>{offer.title}</strong>: {offer.description}

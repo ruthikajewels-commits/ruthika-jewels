@@ -98,7 +98,7 @@ export default function HeroBanner({ banners = [] }) {
                   <div className="hero-custom-img-wrapper">
                     <img 
                       src="/founder_pink.jpg" 
-                      alt="Mrs. Ruthika, Founder of Ruthika Jewellery" 
+                      alt="G.Divyareddy, Founder of Ruthika Jewellery" 
                       className="hero-custom-image"
                     />
                   </div>

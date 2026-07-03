@@ -65,7 +65,7 @@ export default function WhyRuthika() {
           <div className="why-ruthika-img-wrapper">
             <img 
               src="/founder_new.jpg" 
-              alt="Mrs. Ruthika, Founder of Ruthika Jewellery" 
+              alt="G.Divyareddy, Founder of Ruthika Jewellery" 
               className="why-ruthika-img"
               loading="lazy"
             />
