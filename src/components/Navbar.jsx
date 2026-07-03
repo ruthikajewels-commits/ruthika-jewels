@@ -45,8 +45,8 @@ export default function Navbar({
             src="/logo.png" 
             alt="Ruthika Jewellery Logo" 
             style={{ 
-              height: "55px", 
-              width: "55px", 
+              height: "65px", 
+              width: "65px", 
               borderRadius: "50%", 
               objectFit: "cover",
               display: "block",
@@ -151,8 +151,8 @@ export default function Navbar({
                 src="/logo.png" 
                 alt="Ruthika Jewellery Logo" 
                 style={{ 
-                  height: "45px", 
-                  width: "45px", 
+                  height: "55px", 
+                  width: "55px", 
                   borderRadius: "50%", 
                   objectFit: "cover",
                   display: "block",

@@ -18,8 +18,8 @@ export default function Footer() {
                 src="/logo.png" 
                 alt="Ruthika Jewellery Logo" 
                 style={{ 
-                  height: "60px", 
-                  width: "60px", 
+                  height: "75px", 
+                  width: "75px", 
                   borderRadius: "50%", 
                   objectFit: "cover",
                   display: "block",
