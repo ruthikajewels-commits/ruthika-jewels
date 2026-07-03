@@ -887,17 +887,18 @@ export default function AdminDashboard() {
                 <div className="admin-image-actions-panel">
                   {/* File Upload Selector */}
                   <div className="admin-file-upload-wrapper">
-                    <label className="admin-file-upload-label">
+                    <label htmlFor="prod-file-upload" className="admin-file-upload-label" style={{ cursor: "pointer" }}>
                       <ImageIcon size={18} />
                       <span>Upload Images (from Mobile Gallery / Laptop Files)</span>
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        multiple 
-                        onChange={handleImageFileUpload}
-                        style={{ display: "none" }}
-                      />
                     </label>
+                    <input 
+                      type="file" 
+                      id="prod-file-upload"
+                      accept="image/*" 
+                      multiple 
+                      onChange={handleImageFileUpload}
+                      style={{ display: "none" }}
+                    />
                   </div>
 
                   {/* Web URL input fallback */}
@@ -1217,17 +1218,19 @@ export default function AdminDashboard() {
                 {/* Upload File Select Control */}
                 <div style={{ display: "flex", gap: "10px", alignItems: "center", marginTop: "10px" }}>
                   <label 
+                    htmlFor="cat-file-upload"
                     className="btn btn-secondary btn-sm" 
                     style={{ flexGrow: 1, textAlign: "center", cursor: "pointer", margin: 0, padding: "8px 12px", fontSize: "0.78rem" }}
                   >
                     Upload File
-                    <input 
-                      type="file" 
-                      accept="image/*" 
-                      style={{ display: "none" }} 
-                      onChange={handleCategoryImageUpload}
-                    />
                   </label>
+                  <input 
+                    type="file" 
+                    id="cat-file-upload"
+                    accept="image/*" 
+                    style={{ display: "none" }} 
+                    onChange={handleCategoryImageUpload}
+                  />
                   <span style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", fontWeight: "bold" }}>OR</span>
                   <input
                     type="text"

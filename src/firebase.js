@@ -554,7 +554,7 @@ const compressImageFile = (file) => {
         const canvas = document.createElement("canvas");
         let width = img.width;
         let height = img.height;
-        const MAX_DIM = 900;
+        const MAX_DIM = 1200;
         
         if (width > MAX_DIM || height > MAX_DIM) {
           if (width > height) {
@@ -571,8 +571,8 @@ const compressImageFile = (file) => {
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
         
-        // Convert to compressed web JPEG (70% quality)
-        resolve(canvas.toDataURL("image/jpeg", 0.7));
+        // Convert to compressed web JPEG (85% quality for HD clarity)
+        resolve(canvas.toDataURL("image/jpeg", 0.85));
       };
       img.onerror = () => {
         resolve(e.target.result); // Fallback to raw base64
@@ -595,7 +595,8 @@ export const dbUploadFile = async (file) => {
       const downloadUrl = await getDownloadURL(snapshot.ref);
       return downloadUrl;
     } catch (e) {
-      console.warn("Firebase Storage requires billing setup. Falling back to compressed base64:", e);
+      console.warn("Firebase Storage failed, falling back to compressed base64:", e);
+      return compressImageFile(file);
     }
   }
 
