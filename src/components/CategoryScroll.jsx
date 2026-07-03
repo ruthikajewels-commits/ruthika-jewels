@@ -5,9 +5,9 @@ import "./CategoryScroll.css";
 // Category specific image mappings for Ruthika Jewellery
 const categoryImages = {
   haarams: "/haarams_cat.png",
-  necklaces: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=150&h=150&q=80",
+  necklaces: "/necklaces_cat.png",
   earrings: "/earrings_cat.png",
-  hipbelts: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=150&h=150&q=80",
+  hipbelts: "/hipbelts_cat.png",
   blackbeads: "/blackbeads_cat.png",
   bangles: "/bangles_cat.png"
 };
@@ -31,8 +31,8 @@ export default function CategoryScroll({ categories = [], onSelectCategory }) {
     if (id.includes("earring") || name.includes("earring")) return "/earrings_cat.png";
     if (id.includes("blackbead") || name.includes("blackbead") || id.includes("mangalsutra") || name.includes("mangalsutra")) return "/blackbeads_cat.png";
     if (id.includes("bangle") || name.includes("bangle")) return "/bangles_cat.png";
-    if (id.includes("necklace") || name.includes("necklace")) return categoryImages.necklaces;
-    if (id.includes("hipbelt") || name.includes("hipbelt") || id.includes("vaddanam") || name.includes("vaddanam")) return categoryImages.hipbelts;
+    if (id.includes("necklace") || name.includes("necklace")) return "/necklaces_cat.png";
+    if (id.includes("hipbelt") || name.includes("hipbelt") || id.includes("vaddanam") || name.includes("vaddanam")) return "/hipbelts_cat.png";
     
     return categoryImages[category.id] || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=150&h=150&q=80";
   };
