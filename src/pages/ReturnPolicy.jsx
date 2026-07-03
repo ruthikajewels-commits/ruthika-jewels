@@ -19,7 +19,7 @@ export default function ReturnPolicy() {
           <div style={{ display: "flex", flexDirection: "column", gap: "25px", marginBottom: "35px" }}>
             <div style={{ padding: "20px", border: "1px solid rgba(212,175,55,0.2)", borderRadius: "8px", background: "rgba(255,255,255,0.02)" }}>
               <h3 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.2rem", marginBottom: "10px" }}>
-                1. Incorrect Product Delivered (ఆర్డర్ చేసిన దానికి బదులు వేరే ప్రొడక్ట్ వస్తే)
+                1. Incorrect Product Delivered
               </h3>
               <p>
                 If by mistake you receive a completely different design or SKU from the one ordered (for example: you ordered a ring but received a necklace), we will replace it.
@@ -28,7 +28,7 @@ export default function ReturnPolicy() {
 
             <div style={{ padding: "20px", border: "1px solid rgba(212,175,55,0.2)", borderRadius: "8px", background: "rgba(255,255,255,0.02)" }}>
               <h3 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.2rem", marginBottom: "10px" }}>
-                2. Product Arrives Damaged (ట్రాన్సిట్‌లో ప్రొడక్ట్ డ్యామేజ్ అయితే)
+                2. Product Arrives Damaged
               </h3>
               <p>
                 If the product is damaged during transit, you are eligible for a replacement or a return.
@@ -38,7 +38,7 @@ export default function ReturnPolicy() {
 
           <div style={{ padding: "20px", border: "2px solid var(--color-gold)", borderRadius: "8px", background: "rgba(58,6,14,0.05)", marginBottom: "30px" }}>
             <h3 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.2rem", marginBottom: "10px", display: "flex", alignItems: "center", gap: "8px" }}>
-              ⚠️ Mandatory Unboxing Video Proof (అన్‌బాక్సింగ్ వీడియో తప్పనిసరి)
+              ⚠️ Mandatory Unboxing Video Proof
             </h3>
             <p style={{ fontWeight: "600", color: "var(--color-maroon-dark)" }}>
               To claim a replacement for damage or an incorrect item, customers MUST record a single, continuous, unedited unboxing video starting from showing the sealed shipping package label, opening the parcel, and showing the item's condition clearly on camera.
