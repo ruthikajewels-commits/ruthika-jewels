@@ -96,6 +96,7 @@ export default function AdminDashboard() {
       category: selectedAdminCategory || (categories[0]?.id || ""),
       price: "",
       discountPrice: "",
+      discountPercent: "",
       images: [],
       description: "",
       specifications: "",
@@ -108,7 +109,11 @@ export default function AdminDashboard() {
   };
 
   const handleOpenEditProduct = (prod) => {
-    setCurrentProduct({ ...prod });
+    let pct = "";
+    if (prod.price && prod.discountPrice) {
+      pct = Math.round(((prod.price - prod.discountPrice) / prod.price) * 100);
+    }
+    setCurrentProduct({ ...prod, discountPercent: pct });
     setShowProductModal(true);
   };
 
@@ -123,7 +128,10 @@ export default function AdminDashboard() {
       images: cleanImages.length > 0 ? cleanImages : ["https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=300&q=80"]
     };
 
-    await dbSaveProduct(updatedProd);
+    // Clean up temporary local fields before saving
+    const { discountPercent, ...productData } = updatedProd;
+
+    await dbSaveProduct(productData);
     triggerNotification(`Product "${updatedProd.name}" saved successfully.`);
     setShowProductModal(false);
     setCurrentProduct(null);
@@ -694,7 +702,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "15px" }}>
                 <div className="form-group">
                   <label className="form-label" htmlFor="prod-price">Original Price (₹) *</label>
                   <input
@@ -702,8 +710,41 @@ export default function AdminDashboard() {
                     id="prod-price"
                     className="form-control"
                     value={currentProduct.price}
-                    onChange={(e) => setCurrentProduct({ ...currentProduct, price: Number(e.target.value) })}
+                    onChange={(e) => {
+                      const val = e.target.value ? Number(e.target.value) : "";
+                      let discPrice = currentProduct.discountPrice;
+                      if (val && currentProduct.discountPercent) {
+                        discPrice = Math.round(val - (val * currentProduct.discountPercent / 100));
+                      }
+                      setCurrentProduct({ 
+                        ...currentProduct, 
+                        price: val,
+                        discountPrice: discPrice
+                      });
+                    }}
                     required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="prod-discount-percent">Discount (%) [Optional]</label>
+                  <input
+                    type="number"
+                    id="prod-discount-percent"
+                    className="form-control"
+                    placeholder="e.g. 10"
+                    value={currentProduct.discountPercent || ""}
+                    onChange={(e) => {
+                      const pct = e.target.value ? Number(e.target.value) : "";
+                      let discPrice = "";
+                      if (currentProduct.price && pct !== "") {
+                        discPrice = Math.round(currentProduct.price - (currentProduct.price * pct / 100));
+                      }
+                      setCurrentProduct({ 
+                        ...currentProduct, 
+                        discountPercent: pct,
+                        discountPrice: discPrice
+                      });
+                    }}
                   />
                 </div>
                 <div className="form-group">
@@ -713,7 +754,18 @@ export default function AdminDashboard() {
                     id="prod-discount-price"
                     className="form-control"
                     value={currentProduct.discountPrice || ""}
-                    onChange={(e) => setCurrentProduct({ ...currentProduct, discountPrice: e.target.value ? Number(e.target.value) : "" })}
+                    onChange={(e) => {
+                      const discVal = e.target.value ? Number(e.target.value) : "";
+                      let pct = "";
+                      if (currentProduct.price && discVal !== "") {
+                        pct = Math.round(((currentProduct.price - discVal) / currentProduct.price) * 100);
+                      }
+                      setCurrentProduct({ 
+                        ...currentProduct, 
+                        discountPrice: discVal,
+                        discountPercent: pct
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -796,7 +848,7 @@ export default function AdminDashboard() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
                 <div className="form-group">
-                  <label className="form-label" htmlFor="prod-specs">Specifications</label>
+                  <label className="form-label" htmlFor="prod-specs">Specifications [Optional]</label>
                   <input
                     type="text"
                     id="prod-specs"
@@ -807,7 +859,7 @@ export default function AdminDashboard() {
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label" htmlFor="prod-warranty">Warranty details</label>
+                  <label className="form-label" htmlFor="prod-warranty">Warranty details [Optional]</label>
                   <input
                     type="text"
                     id="prod-warranty"
