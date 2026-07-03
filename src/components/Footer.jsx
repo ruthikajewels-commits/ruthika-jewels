@@ -15,11 +15,11 @@ export default function Footer() {
           <div className="footer-brand-col">
             <Link to="/" className="footer-logo" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
               <img 
-                src="/logo.png" 
+                src="/logo.jpg" 
                 alt="Ruthika Jewellery Logo" 
                 style={{ 
-                  height: "75px", 
-                  width: "75px", 
+                  height: "80px", 
+                  width: "80px", 
                   borderRadius: "50%", 
                   objectFit: "cover",
                   display: "block",

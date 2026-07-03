@@ -42,11 +42,11 @@ export default function Navbar({
         {/* Brand Logo */}
         <Link to="/" className="nav-logo" onClick={closeMenu} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <img 
-            src="/logo.png" 
+            src="/logo.jpg" 
             alt="Ruthika Jewellery Logo" 
             style={{ 
-              height: "65px", 
-              width: "65px", 
+              height: "70px", 
+              width: "70px", 
               borderRadius: "50%", 
               objectFit: "cover",
               display: "block",
@@ -148,11 +148,11 @@ export default function Navbar({
           <div className="drawer-header">
             <Link to="/" className="nav-logo" onClick={closeMenu} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
               <img 
-                src="/logo.png" 
+                src="/logo.jpg" 
                 alt="Ruthika Jewellery Logo" 
                 style={{ 
-                  height: "55px", 
-                  width: "55px", 
+                  height: "60px", 
+                  width: "60px", 
                   borderRadius: "50%", 
                   objectFit: "cover",
                   display: "block",
