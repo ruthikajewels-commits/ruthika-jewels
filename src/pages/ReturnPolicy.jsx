@@ -12,66 +12,41 @@ export default function ReturnPolicy() {
 
         <div style={{ lineHeight: "1.8", color: "var(--color-text-dark)", fontSize: "0.95rem" }}>
           
-          <section style={{ marginBottom: "30px" }}>
-            <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.4rem", marginBottom: "15px" }}>
-              1. Overview of Return & Replacement Criteria
-            </h2>
-            <p>
-              Due to the delicate, handcrafted nature of temple jewelry, we do not support general refunds or returns based on design preferences. We only accept returns, refunds, or replacements under the following two conditions:
-            </p>
-            <ul style={{ paddingLeft: "20px", marginTop: "10px", display: "flex", flexDirection: "column", gap: "10px" }}>
-              <li>
-                <strong>Product Arrives Damaged:</strong> If the product is damaged during transit, you are eligible for a money return (refund) or replacement. This requires full, continuous unboxing video proof showing the package seal and damage.
-              </li>
-              <li>
-                <strong>Incorrect Product Delivered:</strong> If by mistake you receive a completely different design from what you ordered (e.g., you ordered a ring but received a necklace), we will replace it. This also requires full, continuous unboxing video proof.
-              </li>
-            </ul>
-          </section>
+          <p style={{ marginBottom: "25px", fontSize: "1.05rem", fontWeight: "500" }}>
+            Due to the delicate, handcrafted nature of temple jewelry, we do not support general refunds or returns based on design preferences. We only accept returns or replacements under the following two conditions:
+          </p>
 
-          <section style={{ marginBottom: "30px" }}>
-            <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.4rem", marginBottom: "15px" }}>
-              2. Open Box Video Requirement
-            </h2>
-            <p style={{ fontWeight: "600", color: "var(--color-maroon-light)" }}>
-              ⚠️ IMPORTANT: To claim damages or incorrect item replacements, customers MUST record a continuous unboxing video starting from showing the sealed shipping package label, and opening the parcel, showing the item's damage on camera.
-            </p>
-            <p style={{ marginTop: "10px" }}>
-              Claims submitted without a valid, unedited unboxing/open-box video will not be approved.
-            </p>
-          </section>
+          <div style={{ display: "flex", flexDirection: "column", gap: "25px", marginBottom: "35px" }}>
+            <div style={{ padding: "20px", border: "1px solid rgba(212,175,55,0.2)", borderRadius: "8px", background: "rgba(255,255,255,0.02)" }}>
+              <h3 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.2rem", marginBottom: "10px" }}>
+                1. Incorrect Product Delivered (ఆర్డర్ చేసిన దానికి బదులు వేరే ప్రొడక్ట్ వస్తే)
+              </h3>
+              <p>
+                If by mistake you receive a completely different design or SKU from the one ordered (for example: you ordered a ring but received a necklace), we will replace it.
+              </p>
+            </div>
 
-          <section style={{ marginBottom: "30px" }}>
-            <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.4rem", marginBottom: "15px" }}>
-              3. Timeframe for Claims
-            </h2>
-            <p>
-              Transit damages or defective product claims must be reported within <strong>48 hours of delivery</strong>. Please message us on WhatsApp or email us at <strong>returns@ruthikajewellery.com</strong> with the unboxing video and order details.
-            </p>
-          </section>
+            <div style={{ padding: "20px", border: "1px solid rgba(212,175,55,0.2)", borderRadius: "8px", background: "rgba(255,255,255,0.02)" }}>
+              <h3 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.2rem", marginBottom: "10px" }}>
+                2. Product Arrives Damaged (ట్రాన్సిట్‌లో ప్రొడక్ట్ డ్యామేజ్ అయితే)
+              </h3>
+              <p>
+                If the product is damaged during transit, you are eligible for a replacement or a return.
+              </p>
+            </div>
+          </div>
 
-          <section style={{ marginBottom: "30px" }}>
-            <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.4rem", marginBottom: "15px" }}>
-              4. Replacement Process
-            </h2>
-            <p>
-              Once your damage claim is verified:
+          <div style={{ padding: "20px", border: "2px solid var(--color-gold)", borderRadius: "8px", background: "rgba(58,6,14,0.05)", marginBottom: "30px" }}>
+            <h3 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.2rem", marginBottom: "10px", display: "flex", alignItems: "center", gap: "8px" }}>
+              ⚠️ Mandatory Unboxing Video Proof (అన్‌బాక్సింగ్ వీడియో తప్పనిసరి)
+            </h3>
+            <p style={{ fontWeight: "600", color: "var(--color-maroon-dark)" }}>
+              To claim a replacement for damage or an incorrect item, customers MUST record a single, continuous, unedited unboxing video starting from showing the sealed shipping package label, opening the parcel, and showing the item's condition clearly on camera.
             </p>
-            <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>
-              <li>We will arrange a reverse pickup (or request you to ship it back, reimbursing standard shipping costs).</li>
-              <li>The returned item must be unused, in its original packaging frame.</li>
-              <li>Upon receiving the damaged item, we will ship a fresh replacement within 3-5 working days. If the design is sold out, we will issue a store credit coupon or refund.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "var(--font-display)", color: "var(--color-maroon-dark)", fontSize: "1.4rem", marginBottom: "15px" }}>
-              5. Polish Warranty
-            </h2>
-            <p>
-              For products offering a 6-month or 1-year polish warranty, if gold micro-plating fades prematurely under normal wear (excluding chemical spray exposure), we will polish the item free of cost. Reverse shipping costs are to be borne by the customer.
+            <p style={{ marginTop: "10px", fontWeight: "500" }}>
+              Claims submitted without a valid, unedited open-box video will not be approved.
             </p>
-          </section>
+          </div>
 
         </div>
 
