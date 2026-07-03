@@ -2,14 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./CategoryScroll.css";
 
-// Unsplash category specific image mappings for Ruthika Jewellery
+// Category specific image mappings for Ruthika Jewellery
 const categoryImages = {
-  haarams: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=150&h=150&q=80",
+  haarams: "/haarams_cat.png",
   necklaces: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=150&h=150&q=80",
-  earrings: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=150&h=150&q=80",
+  earrings: "/earrings_cat.png",
   hipbelts: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=150&h=150&q=80",
-  blackbeads: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=150&h=150&q=80",
-  bangles: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=150&h=150&q=80"
+  blackbeads: "/blackbeads_cat.png",
+  bangles: "/bangles_cat.png"
 };
 
 export default function CategoryScroll({ categories = [], onSelectCategory }) {
@@ -23,8 +23,18 @@ export default function CategoryScroll({ categories = [], onSelectCategory }) {
     }
   };
 
-  const getCategoryImage = (catId) => {
-    return categoryImages[catId] || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=150&h=150&q=80";
+  const getCategoryImage = (category) => {
+    const id = (category.id || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    const name = (category.name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    
+    if (id.includes("haaram") || name.includes("haaram")) return "/haarams_cat.png";
+    if (id.includes("earring") || name.includes("earring")) return "/earrings_cat.png";
+    if (id.includes("blackbead") || name.includes("blackbead") || id.includes("mangalsutra") || name.includes("mangalsutra")) return "/blackbeads_cat.png";
+    if (id.includes("bangle") || name.includes("bangle")) return "/bangles_cat.png";
+    if (id.includes("necklace") || name.includes("necklace")) return categoryImages.necklaces;
+    if (id.includes("hipbelt") || name.includes("hipbelt") || id.includes("vaddanam") || name.includes("vaddanam")) return categoryImages.hipbelts;
+    
+    return categoryImages[category.id] || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=150&h=150&q=80";
   };
 
   return (
@@ -40,7 +50,7 @@ export default function CategoryScroll({ categories = [], onSelectCategory }) {
               <div className="category-circle-wrapper">
                 <div className="category-circle-inner">
                   <img
-                    src={getCategoryImage(category.id)}
+                    src={getCategoryImage(category)}
                     alt={category.name}
                     className="category-img"
                     loading="lazy"
