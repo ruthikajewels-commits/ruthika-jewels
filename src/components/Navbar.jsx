@@ -40,10 +40,23 @@ export default function Navbar({
       <div className="container nav-container">
         
         {/* Brand Logo */}
-        <Link to="/" className="nav-logo" onClick={closeMenu}>
-          <div>
-            <span className="logo-text">RUTHIKA</span>
-            <span className="logo-sub">Jewellery</span>
+        <Link to="/" className="nav-logo" onClick={closeMenu} style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
+          <img 
+            src="/logo.png" 
+            alt="Ruthika Jewellery Logo" 
+            style={{ 
+              height: "55px", 
+              width: "55px", 
+              borderRadius: "50%", 
+              objectFit: "cover",
+              display: "block",
+              border: "1.5px solid var(--color-gold)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.3)"
+            }} 
+          />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span className="logo-text" style={{ fontSize: "1.6rem", lineHeight: "1.1", fontWeight: "700" }}>RUTHIKA</span>
+            <span className="logo-sub" style={{ fontSize: "0.75rem", letterSpacing: "3px" }}>JEWELLERS</span>
           </div>
         </Link>
 
@@ -133,10 +146,22 @@ export default function Navbar({
       <div className={`mobile-nav-overlay ${isOpen ? "open" : ""}`} onClick={closeMenu}>
         <div className="mobile-drawer" onClick={(e) => e.stopPropagation()}>
           <div className="drawer-header">
-            <Link to="/" className="nav-logo" onClick={closeMenu}>
-              <div>
-                <span className="logo-text" style={{ fontSize: "1.5rem" }}>RUTHIKA</span>
-                <span className="logo-sub">Jewellery</span>
+            <Link to="/" className="nav-logo" onClick={closeMenu} style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
+              <img 
+                src="/logo.png" 
+                alt="Ruthika Jewellery Logo" 
+                style={{ 
+                  height: "45px", 
+                  width: "45px", 
+                  borderRadius: "50%", 
+                  objectFit: "cover",
+                  display: "block",
+                  border: "1.5px solid var(--color-gold)"
+                }} 
+              />
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span className="logo-text" style={{ fontSize: "1.3rem", lineHeight: "1.1", fontWeight: "700" }}>RUTHIKA</span>
+                <span className="logo-sub" style={{ fontSize: "0.65rem", letterSpacing: "2px" }}>JEWELLERS</span>
               </div>
             </Link>
             <button className="drawer-close-btn" onClick={closeMenu} aria-label="Close drawer">

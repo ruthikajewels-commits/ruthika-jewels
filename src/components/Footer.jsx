@@ -13,8 +13,23 @@ export default function Footer() {
           
           {/* Brand Info Column */}
           <div className="footer-brand-col">
-            <Link to="/" className="footer-logo">
-              RUTHIKA
+            <Link to="/" className="footer-logo" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
+              <img 
+                src="/logo.png" 
+                alt="Ruthika Jewellery Logo" 
+                style={{ 
+                  height: "60px", 
+                  width: "60px", 
+                  borderRadius: "50%", 
+                  objectFit: "cover",
+                  display: "block",
+                  border: "1.5px solid var(--color-gold)"
+                }} 
+              />
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span className="logo-text" style={{ fontSize: "1.6rem", lineHeight: "1.1", fontWeight: "700" }}>RUTHIKA</span>
+                <span className="logo-sub" style={{ fontSize: "0.75rem", letterSpacing: "3px" }}>JEWELLERS</span>
+              </div>
             </Link>
             <p className="footer-description">
               Handcrafted with devotion. Bringing you the finest gold-plated temple jewelry, exquisite Haarams, Kundan necksets, and bridal accessories that reflect spiritual grace.
