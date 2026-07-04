@@ -193,6 +193,12 @@ export default function ProductDetails({ onToggleWishlist, wishlist, onAddToCart
                   Warranty
                 </button>
                 <button 
+                  className={`tab-btn ${activeTab === "delivery" ? "active" : ""}`}
+                  onClick={() => setActiveTab("delivery")}
+                >
+                  Delivery Info
+                </button>
+                <button 
                   className={`tab-btn ${activeTab === "care" ? "active" : ""}`}
                   onClick={() => setActiveTab("care")}
                 >
@@ -237,6 +243,17 @@ export default function ProductDetails({ onToggleWishlist, wishlist, onAddToCart
                       <Shield size={20} style={{ color: "var(--color-gold)", flexShrink: 0, marginTop: "2px" }} />
                       <p><strong>Warranty Detail:</strong> {product.warranty && product.warranty.trim() ? product.warranty : "No warranty"}</p>
                     </div>
+                  </div>
+                )}
+
+                {activeTab === "delivery" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "10px", lineHeight: "1.6" }}>
+                    <p style={{ fontWeight: "700", color: "var(--color-maroon-dark)", marginBottom: "5px" }}>Estimated Delivery Time:</p>
+                    <ol style={{ paddingLeft: "20px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                      <li><strong>5 to 7 working days</strong> from order date for non making products (necksets, harams, accessories, etc.)</li>
+                      <li><strong>5 to 7 working days</strong> for handmaking items (beads, beads harams, etc.)</li>
+                      <li>Please verify details (address, pincode, contact) before placing an order to avoid delays.</li>
+                    </ol>
                   </div>
                 )}
 
