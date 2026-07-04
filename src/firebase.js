@@ -77,14 +77,14 @@ const DEFAULT_CATEGORIES = [
 const DEFAULT_BANNERS = [
   {
     id: "banner-1",
-    imageUrl: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/banner-new-1.jpg",
     title: "Divine Heritage Collection",
     subtitle: "Handcrafted traditional temple jewellery reflecting spiritual elegance.",
     link: "/shop?category=necklaces"
   },
   {
     id: "banner-2",
-    imageUrl: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/banner-new-2.jpg",
     title: "The Golden Splendor",
     subtitle: "Up to 15% discount on all Bridal Haarams. Limited Period Offer.",
     link: "/shop?category=haarams"
@@ -275,6 +275,19 @@ const checkAndSeedFirestore = async () => {
       // Mark as seeded
       await setDoc(seedDocRef, { seeded: true, initializedAt: new Date().toISOString() });
       console.log("Firestore seeding completed successfully.");
+    } else {
+      // Auto-migrate legacy unsplash banner URLs to the new local image files in Firestore
+      for (const b of DEFAULT_BANNERS) {
+        const docRef = doc(firestoreDb, "banners", b.id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.imageUrl && data.imageUrl.includes("unsplash.com")) {
+            await setDoc(docRef, { ...data, imageUrl: b.imageUrl });
+            console.log(`Auto-migrated legacy banner ${b.id} to new background.`);
+          }
+        }
+      }
     }
   } catch (e) {
     console.error("Error during Firestore seeding check:", e);
