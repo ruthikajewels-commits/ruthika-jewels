@@ -146,9 +146,14 @@ export default function AdminDashboard() {
 
   const handleDeleteProduct = async (id, name) => {
     if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
-      await dbDeleteProduct(id);
-      triggerNotification(`Product "${name}" deleted.`);
-      loadAllDashboardData();
+      try {
+        await dbDeleteProduct(id);
+        triggerNotification(`Product "${name}" deleted.`);
+        loadAllDashboardData();
+      } catch (err) {
+        console.error("Error deleting product:", err);
+        alert(`Failed to delete "${name}". Please check your internet connection or Firebase rules. Details: ${err.message || err}`);
+      }
     }
   };
 
@@ -259,16 +264,21 @@ export default function AdminDashboard() {
 
   const handleDeleteCategoryDirect = async (catId, catName) => {
     if (window.confirm(`Are you sure you want to delete the category "${catName}"? This will not delete the designs under it.`)) {
-      await dbDeleteCategory(catId);
-      triggerNotification(`Category "${catName}" deleted.`);
-      await loadAllDashboardData();
-      setSelectedAdminCategory((prev) => {
-        if (prev === catId) {
-          const remaining = categories.find(c => c.id !== catId);
-          return remaining ? remaining.id : "";
-        }
-        return prev;
-      });
+      try {
+        await dbDeleteCategory(catId);
+        triggerNotification(`Category "${catName}" deleted.`);
+        await loadAllDashboardData();
+        setSelectedAdminCategory((prev) => {
+          if (prev === catId) {
+            const remaining = categories.find(c => c.id !== catId);
+            return remaining ? remaining.id : "";
+          }
+          return prev;
+        });
+      } catch (err) {
+        console.error("Error deleting category:", err);
+        alert(`Failed to delete category "${catName}". Details: ${err.message || err}`);
+      }
     }
   };
 
@@ -291,9 +301,14 @@ export default function AdminDashboard() {
 
   const handleDeleteBanner = async (id, title) => {
     if (window.confirm(`Are you sure you want to delete banner "${title}"?`)) {
-      await dbDeleteBanner(id);
-      triggerNotification(`Banner "${title}" deleted.`);
-      loadAllDashboardData();
+      try {
+        await dbDeleteBanner(id);
+        triggerNotification(`Banner "${title}" deleted.`);
+        loadAllDashboardData();
+      } catch (err) {
+        console.error("Error deleting banner:", err);
+        alert(`Failed to delete banner "${title}". Details: ${err.message || err}`);
+      }
     }
   };
 
@@ -316,9 +331,14 @@ export default function AdminDashboard() {
 
   const handleDeleteOffer = async (id, title) => {
     if (window.confirm(`Are you sure you want to delete offer "${title}"?`)) {
-      await dbDeleteOffer(id);
-      triggerNotification(`Offer "${title}" deleted.`);
-      loadAllDashboardData();
+      try {
+        await dbDeleteOffer(id);
+        triggerNotification(`Offer "${title}" deleted.`);
+        loadAllDashboardData();
+      } catch (err) {
+        console.error("Error deleting offer:", err);
+        alert(`Failed to delete offer "${title}". Details: ${err.message || err}`);
+      }
     }
   };
 

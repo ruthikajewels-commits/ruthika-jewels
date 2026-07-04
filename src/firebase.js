@@ -9,6 +9,7 @@ import {
   getFirestore, 
   collection, 
   getDocs, 
+  getDoc,
   doc, 
   setDoc, 
   deleteDoc,
@@ -242,24 +243,54 @@ initLocalStorage();
 // DATABASE WRAPPER FUNCTIONS (Firestore / LocalStorage)
 // -------------------------------------------------------------
 
+// Helper to initialize Firestore database once
+const checkAndSeedFirestore = async () => {
+  if (!isFirebaseEnabled) return;
+  try {
+    const seedDocRef = doc(firestoreDb, "settings", "seeding");
+    const seedDoc = await getDoc(seedDocRef);
+    if (!seedDoc.exists()) {
+      console.log("First time initialization: seeding default data to Firestore...");
+      
+      // Seed Categories
+      for (const cat of DEFAULT_CATEGORIES) {
+        await setDoc(doc(firestoreDb, "categories", cat.id), cat);
+      }
+      
+      // Seed Products
+      for (const prod of DEFAULT_PRODUCTS) {
+        await setDoc(doc(firestoreDb, "products", prod.id), prod);
+      }
+      
+      // Seed Banners
+      for (const b of DEFAULT_BANNERS) {
+        await setDoc(doc(firestoreDb, "banners", b.id), b);
+      }
+      
+      // Seed Offers
+      for (const o of DEFAULT_OFFERS) {
+        await setDoc(doc(firestoreDb, "offers", o.id), o);
+      }
+
+      // Mark as seeded
+      await setDoc(seedDocRef, { seeded: true, initializedAt: new Date().toISOString() });
+      console.log("Firestore seeding completed successfully.");
+    }
+  } catch (e) {
+    console.error("Error during Firestore seeding check:", e);
+  }
+};
+
 // Products API
 export const dbGetProducts = async () => {
   if (isFirebaseEnabled) {
     try {
+      await checkAndSeedFirestore();
       const querySnapshot = await getDocs(collection(firestoreDb, "products"));
       const list = [];
       querySnapshot.forEach((doc) => {
         list.push({ id: doc.id, ...doc.data() });
       });
-      
-      // Auto-seed default products if empty
-      if (list.length === 0) {
-        console.log("Auto-seeding default products to Firestore...");
-        for (const prod of DEFAULT_PRODUCTS) {
-          await setDoc(doc(firestoreDb, "products", prod.id), prod);
-          list.push(prod);
-        }
-      }
       return list;
     } catch (e) {
       console.error("Firestore read error, using fallback:", e);
@@ -304,6 +335,7 @@ export const dbDeleteProduct = async (id) => {
       return true;
     } catch (e) {
       console.error("Firestore delete error:", e);
+      throw e;
     }
   }
 
@@ -320,15 +352,6 @@ export const dbGetCategories = async () => {
       const snapshot = await getDocs(collection(firestoreDb, "categories"));
       const list = [];
       snapshot.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
-      
-      // Auto-seed default categories if empty
-      if (list.length === 0) {
-        console.log("Auto-seeding default categories to Firestore...");
-        for (const cat of DEFAULT_CATEGORIES) {
-          await setDoc(doc(firestoreDb, "categories", cat.id), cat);
-          list.push(cat);
-        }
-      }
       return list;
     } catch (e) {
       console.error("Firestore read error:", e);
@@ -365,6 +388,7 @@ export const dbDeleteCategory = async (id) => {
       return true;
     } catch (e) {
       console.error("Firestore delete error:", e);
+      throw e;
     }
   }
 
@@ -381,15 +405,6 @@ export const dbGetBanners = async () => {
       const snapshot = await getDocs(collection(firestoreDb, "banners"));
       const list = [];
       snapshot.forEach(doc => list.push({ id: doc.id, ...doc.data() }));
-      
-      // Auto-seed default banners if empty
-      if (list.length === 0) {
-        console.log("Auto-seeding default banners to Firestore...");
-        for (const b of DEFAULT_BANNERS) {
-          await setDoc(doc(firestoreDb, "banners", b.id), b);
-          list.push(b);
-        }
-      }
       return list;
     } catch (e) {
       console.error("Firestore read error:", e);
@@ -426,6 +441,7 @@ export const dbDeleteBanner = async (id) => {
       return true;
     } catch (e) {
       console.error("Firestore delete error:", e);
+      throw e;
     }
   }
 
@@ -478,6 +494,7 @@ export const dbDeleteOffer = async (id) => {
       return true;
     } catch (e) {
       console.error("Firestore delete error:", e);
+      throw e;
     }
   }
 
