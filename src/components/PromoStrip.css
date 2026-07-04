@@ -69,16 +69,16 @@
   font-weight: 900 !important;
 }
 
-.promo-code-badge {
+.promo-text-wrapper span.promo-code-badge {
   background-color: #000000 !important;
-  color: #f9e29b !important;
+  color: #ffffff !important;
   padding: 3px 10px !important;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-sm) !important;
   font-size: 0.85rem !important;
   font-weight: 900 !important;
   border: 1px solid #d4af37 !important;
-  margin-left: 4px;
-  display: inline-block;
+  margin-left: 4px !important;
+  display: inline-block !important;
 }
 
 .promo-discount-badge {
@@ -91,7 +91,7 @@
     height: 42px;
     font-size: 0.88rem;
   }
-  .promo-code-badge {
+  .promo-text-wrapper span.promo-code-badge {
     font-size: 0.75rem !important;
     padding: 2px 8px !important;
   }
