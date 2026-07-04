@@ -1,19 +1,19 @@
 .promo-strip {
-  background: var(--color-maroon-dark);
-  color: var(--color-gold-light);
+  background: linear-gradient(90deg, #d4af37 0%, #f9e29b 50%, #d4af37 100%) !important;
+  color: #000000 !important;
   overflow: hidden;
-  height: 40px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+  font-size: 1.02rem;
+  font-weight: 900;
+  letter-spacing: 1px;
   text-transform: uppercase;
   position: relative;
   z-index: 999;
-  border-bottom: 1.5px solid var(--color-gold);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid #b38728;
+  box-shadow: 0 2px 4px rgba(58, 6, 14, 0.15);
 }
 
 .promo-container {
@@ -57,45 +57,48 @@
   max-width: 95%;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #ffffff !important;
-  font-weight: 700 !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  font-size: 1.02rem !important;
+  font-family: 'Outfit', 'Inter', sans-serif !important;
 }
 
 .promo-text-wrapper span,
 .promo-text-wrapper strong {
-  color: var(--color-gold-light) !important;
-  font-weight: 800 !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
 }
 
 .promo-code-badge {
-  background-color: var(--color-gold);
-  color: var(--color-maroon-dark) !important;
-  padding: 2px 8px;
+  background-color: #000000 !important;
+  color: #f9e29b !important;
+  padding: 3px 10px !important;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 800;
-  border: 1px solid var(--color-gold-light);
-  box-shadow: var(--shadow-sm);
+  font-size: 0.85rem !important;
+  font-weight: 900 !important;
+  border: 1px solid #d4af37 !important;
   margin-left: 4px;
+  display: inline-block;
 }
 
 .promo-discount-badge {
-  color: #ffeb3b !important;
-  font-weight: 800 !important;
+  color: #d32f2f !important;
+  font-weight: 900 !important;
 }
 
 @media (max-width: 480px) {
   .promo-strip {
-    height: 36px;
-    font-size: 0.72rem;
+    height: 42px;
+    font-size: 0.88rem;
   }
   .promo-code-badge {
-    font-size: 0.65rem;
-    padding: 1px 6px;
+    font-size: 0.75rem !important;
+    padding: 2px 8px !important;
   }
   .promo-text-wrapper {
     white-space: normal;
     line-height: 1.2;
     display: block;
+    font-size: 0.88rem !important;
   }
 }
