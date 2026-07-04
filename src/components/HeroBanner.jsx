@@ -113,24 +113,29 @@ export default function HeroBanner({ banners = [] }) {
         return (
           <div
             key={banner.id || index}
-            className={`hero-slide ${index === currentSlide ? "active" : ""}`}
+            className={`hero-slide hero-slide-standard ${index === currentSlide ? "active" : ""}`}
           >
-            <div className="hero-image-wrapper">
-              <img
-                src={banner.imageUrl}
-                alt={banner.title}
-                className="hero-image"
-              />
-              <div className="hero-image-overlay"></div>
-            </div>
-            
-            <div className="hero-content">
-              <span className="hero-subtitle">Exclusive Jewellery</span>
-              <h1 className="hero-title">{banner.title}</h1>
-              <p className="hero-desc">{banner.subtitle}</p>
-              <Link to={banner.link || "/shop"} className="btn btn-primary">
-                Discover Collection
-              </Link>
+            <div className="hero-slide-container">
+              
+              {/* Left Column: Text content */}
+              <div className="hero-content">
+                <span className="hero-subtitle">Exclusive Jewellery</span>
+                <h1 className="hero-title">{banner.title}</h1>
+                <p className="hero-desc">{banner.subtitle}</p>
+                <Link to={banner.link || "/shop"} className="btn btn-primary">
+                  Discover Collection
+                </Link>
+              </div>
+
+              {/* Right Column: Product Image frame displaying the full item */}
+              <div className="hero-image-wrapper">
+                <img
+                  src={banner.imageUrl}
+                  alt={banner.title}
+                  className="hero-image"
+                />
+              </div>
+
             </div>
           </div>
         );
